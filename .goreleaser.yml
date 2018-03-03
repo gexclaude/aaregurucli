@@ -12,6 +12,11 @@ builds:
     - amd64
     - arm
     - arm64
+archive:
+# create zip for windows
+  format_overrides:
+    - goos: windows
+      format: zip
 brew:
   github:
     owner: gexclaude
