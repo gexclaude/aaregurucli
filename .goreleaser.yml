@@ -1,15 +1,15 @@
 project_name: aareguru
 builds:
-    - env:
-      - CGO_ENABLED=0
-    binary: aareguru
-    goos:
-      - linux
-      - darwin
+- env:
+    - CGO_ENABLED=0
+  binary: aareguru
+  goos:
+    - linux
+    - darwin
 #      - windows
-    goarch:
+  goarch:
 #      - 386
-      - amd64
+    - amd64
 #      - arm
 #      - arm64
 brew:
