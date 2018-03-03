@@ -4,64 +4,62 @@ import (
 	"fmt"
 	"time"
     "math/rand"
-	"io/ioutil"
-	"net/http"
-	"encoding/json"
 	"./asciiart"
-	"./model"
+	"./api"
+	"./texts"
 )
 
 func main() {
 	fmt.Print(asciiart.Banner)
-	
-	printOutput(readAareGuru())
+	printOutput(api.AskAareGuru())
 }
 
-func printOutput(aareGuruResponse model.AareGuruResponse) {
+func printOutput(aareGuruResponse api.AareGuruResponse) {
 	t := time.Unix(aareGuruResponse.Aare.Timestamp, 0)
-	glaeser := liter_to_glas(m3_to_liter(aareGuruResponse.Aare.Flow))
-	fmt.Printf("%7.0f - %s\n", glaeser, random_flow_in_glas_text())
+	glasses := liter_to_glasses(m3_to_liter(aareGuruResponse.Aare.Flow))
 
-	fmt.Printf("Itz grad (%02d:%02d - %02d.%02d.%04d)\n", t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year())
-	fmt.Printf("%4.1f %-4s - %s\n", aareGuruResponse.Aare.Temperature, "C°", aareGuruResponse.Aare.Temperature_text)
-	fmt.Printf("%4.0f %4s - %s\n", aareGuruResponse.Aare.Flow, "m3/s", aareGuruResponse.Aare.Flow_text)
+	fmt.Println(box_horizontal_line())
+	fmt.Println(box(fmt.Sprintf("%s (%02d:%02d - %02d.%02d.%04d)", texts.Current_title, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year())))
+	fmt.Println(box_horizontal_line())
+	fmt.Println(box(texts.Water_temperature_label))
+	fmt.Println(box(fmt.Sprintf("%5.1f %-4s - %s", aareGuruResponse.Aare.Temperature, texts.Degree_celsius_label, aareGuruResponse.Aare.Temperature_text)))
+	fmt.Println(box(""))
+	fmt.Println(box(texts.Water_flow_label))
+	fmt.Println(box(fmt.Sprintf("%5.0f %4s - %s (%.0f %s)", aareGuruResponse.Aare.Flow, texts.Cubic_metre_per_second_label, aareGuruResponse.Aare.Flow_text, glasses, random_flow_in_glasses_text())))
+	fmt.Println(box_horizontal_line())
 	fmt.Println()
-	fmt.Printf("I öpe 2h\n")
-	fmt.Printf("%4.1f %-4s - %s\n", aareGuruResponse.Aare.Forecast2h, "C°", aareGuruResponse.Aare.Forecast2h_text)
+	fmt.Println(box_horizontal_line())
+	fmt.Println(box(texts.Forecast2h_title))
+	fmt.Println(box_horizontal_line())
+	fmt.Println(box(texts.Water_temperature_label))
+	fmt.Println(box(fmt.Sprintf("%5.1f %-4s - %s", aareGuruResponse.Aare.Forecast2h, texts.Degree_celsius_label, aareGuruResponse.Aare.Forecast2h_text)))
+	fmt.Println(box_horizontal_line())
+	fmt.Println()
+	fmt.Println(texts.Footer)
 }
 
-func readAareGuru() model.AareGuruResponse {
-	var aareGuruResponse model.AareGuruResponse
-	
-	response, err := http.Get("http://aareguru.existenz.ch/currentV2.php?app=aare.guru.CLI")
-	if err != nil {
-		fmt.Println("Dr aare.guru isch verärgeret. Är git üs kei antwort meh.")
-	} else {
-		data, err := ioutil.ReadAll(response.Body)
-		if (err != nil) {
-			panic(err)
-		}
 
-		json.Unmarshal(data, &aareGuruResponse)
-	}
-	
-	return aareGuruResponse
+func box_horizontal_line() string {
+	return "+--------------------------------------------------------------+"
 }
 
+func box(str string) string {
+	return fmt.Sprintf("| %-60s |", str)
+}
 
 func m3_to_liter(m3 float32) float32 {
 	return m3 * (10 * 10 * 10)
 }
 
-func liter_to_glas(liter float32) float32 {
+func liter_to_glasses(liter float32) float32 {
 	return liter / 0.3 // 3 dl
 } 
 
-func random_flow_in_glas_text() string {
+func random_flow_in_glasses_text() string {
 	if(rand_bool()) {
-		return "Stange Bier/Sec. "
+		return texts.Flow_beer_label
 	} else {
-		return "Sirupgleser/Sec"
+		return texts.Flow_siroop_label
 	}
 }
 

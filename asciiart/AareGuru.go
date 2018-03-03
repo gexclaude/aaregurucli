@@ -1,12 +1,8 @@
 package asciiart
 
 
-const Banner = `
-                                                                                                                        
-                                                                                                                        
-                                                                                                                        
-                                                                                                                        
-                                                                         .l,                                            
+const Banner = 
+`                                                                         .l,                                            
                                                                ,:.      .oO'                                            
                                                                .ol.     cKo      .                                      
                                                                 .do.   ;KO'   .:dc.                                     
@@ -55,6 +51,4 @@ const Banner = `
         .cONWMMMMMMMMMMMMNKd;.     ..';:clooddddolc;..                 :XK:                                             
            'cxOKXNNNNKOxl,.                                           ;0Xc                                              
                ..'''..                                               'ONo.                                              
-                                                                     ,xl.                                               
-                                                                                                                        
 `
