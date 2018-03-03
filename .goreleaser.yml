@@ -1,5 +1,8 @@
+project_name: aareguru
 builds:
-  - binary: aareguru
+- env:
+  - CGO_ENABLED=0
+    binary: aareguru
     goos:
       - linux
       - darwin
@@ -9,3 +12,20 @@ builds:
       - amd64
 #      - arm
 #      - arm64
+brew:
+  github:
+    owner: gexclaude
+    name: homebrew-tap
+  folder: Formula
+  homepage:  https://aare.guru/
+  description: aare.guru Aaretemperatur & Wetter & Sonne fürs Aareschwimmen - Chills mau wider chli
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
