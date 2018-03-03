@@ -6,6 +6,6 @@ Precondition - you need access to the github repository as well as to the corres
 
 If you have everything in place, start releasing
 
-    git tag -a v<x>.<y>.<z>
-    git push origin v<x>.<y>.<z>
-    goreleaser
+    ./release.sh -v v<x>.<y>.<z>
+    
+Whereas <x> is major, <y> minor and <z> bugfix version
