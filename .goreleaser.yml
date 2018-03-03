@@ -1,7 +1,7 @@
 project_name: aareguru
 builds:
-- env:
-  - CGO_ENABLED=0
+    - env:
+      - CGO_ENABLED=0
     binary: aareguru
     goos:
       - linux
