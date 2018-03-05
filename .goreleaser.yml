@@ -17,6 +17,18 @@ archive:
   format_overrides:
     - goos: windows
       format: zip
+nfpm:
+  vendor: aare.guru
+  homepage: https://aare.guru/
+  maintainer: Claude <claude.gex@codeblock.ch>
+  description: aare.guru Aaretemperatur & Wetter & Sonne fürs Aareschwimmen - Chills mau wider chli
+
+  license: Apache 2.0
+
+  # Formats to be generated.
+  formats:
+    - deb
+    - rpm
 brew:
   github:
     owner: gexclaude
@@ -24,6 +36,15 @@ brew:
   folder: Formula
   homepage:  https://aare.guru/
   description: aare.guru Aaretemperatur & Wetter & Sonne fürs Aareschwimmen - Chills mau wider chli
+scoop:
+  bucket:
+    owner: gexclaude
+    name: scoop-bucket
+  commit_author:
+    name: goreleaserbot
+    email: contact@codeblock.ch
+  homepage: "https://aare.guru/"
+  description: "aare.guru Aaretemperatur & Wetter & Sonne fürs Aareschwimmen - Chills mau wider chli"
 checksum:
   name_template: 'checksums.txt'
 snapshot:

@@ -12,7 +12,7 @@ const Flow_siroop_label = "Sirupgleser/Sec"
 const Water_temperature_label = "Wassertämperatur"
 const Water_flow_label = "Wassermängi"
 
-const Footer = " https://aare.guru/impressum"
+const Footer = " https://aare.guru/impressum "
 
 const Error_msg = "Dr aare.guru isch verärgeret. Är git üs kei antwort meh."
 const Error_Detail_msg = "Nachfolgends isch dr detailliert Fehler: "
