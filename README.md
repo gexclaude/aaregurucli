@@ -14,3 +14,7 @@ Obenuse, nid?
 
     brew tap gexclaude/homebrew-tap
     brew install aareguru
+
+## Merci's (Credits)
+
+* https://github.com/logrusorgru/aurora

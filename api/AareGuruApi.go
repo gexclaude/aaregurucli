@@ -31,6 +31,7 @@ func AskAareGuru() AareGuruResponse {
 	response, err := http.Get(config.Endpoint_url)
 	if err != nil {
 		fmt.Println(texts.Error_msg)
+		panic(err)
 	} else {
 		data, err := ioutil.ReadAll(response.Body)
 		if (err != nil) {
