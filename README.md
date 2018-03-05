@@ -17,4 +17,7 @@ Obenuse, nid?
 
 ## Merci's (Credits)
 
+* https://github.com/goreleaser/goreleaser
 * https://github.com/logrusorgru/aurora
+* https://github.com/lukesampson/scoop
+* https://github.com/Homebrew/brew/
