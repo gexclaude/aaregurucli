@@ -28,7 +28,7 @@ nfpm:
   # Formats to be generated.
   formats:
     - deb
-    - rpm
+#    - rpm - not building for the moment as of https://github.com/goreleaser/nfpm/issues/11
 brew:
   github:
     owner: gexclaude
