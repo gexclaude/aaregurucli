@@ -9,20 +9,40 @@ import (
 	"../texts"
 )
 
-type Aare struct {
-	Timestamp int64
-	Timestring string
-	Temperature float32
-	Temperature_text string
-	Flow float32
-	Flow_text string
-	Forecast2h float32
-	Forecast2h_text string
+type AareGuruResponse struct {
+	Status  string
+	Aare    Aare
+	Weather Weather
 }
 
-type AareGuruResponse struct {
-	Status string
-	Aare   Aare
+type Aare struct {
+	Timestamp        int64
+	Timestring       string
+	Temperature      float32
+	Temperature_text string
+	Flow             float32
+	Flow_text        string
+	Forecast2h       float32
+	Forecast2h_text  string
+}
+
+type Weather struct {
+	Current WeatherInfos
+	Today   WeatherToday
+}
+
+type WeatherToday struct {
+	V WeatherInfos
+	N WeatherInfos
+	A WeatherInfos
+}
+
+type WeatherInfos struct {
+	Sy    string
+	Symt  int16
+	Tt    float32
+	Rr    int16
+	Rrisk int16
 }
 
 func AskAareGuru() AareGuruResponse {
