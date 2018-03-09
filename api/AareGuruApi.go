@@ -2,12 +2,9 @@ package api
 
 import (
 	"net/http"
-	"fmt"
 	"io/ioutil"
 	"encoding/json"
 	"../config"
-	"../texts"
-	. "github.com/logrusorgru/aurora"
 )
 
 type AareGuruResponse struct {
@@ -44,12 +41,17 @@ type WeatherInfos struct {
 	Rrisk int16
 }
 
-func AskAareGuru() AareGuruResponse {
+func AskAareGuru(aareGuruResponseChannel chan<-AareGuruResponse, errChannel chan<-string) {
+	defer func() {
+		if r := recover(); r != nil {
+			errChannel <- ""
+		}
+	}()
+	
 	var aareGuruResponse AareGuruResponse
 
 	response, err := http.Get(config.Endpoint_url)
 	if err != nil {
-		fmt.Println(Red(texts.Error_msg))
 		panic(err)
 	} else {
 		data, err := ioutil.ReadAll(response.Body)
@@ -60,5 +62,5 @@ func AskAareGuru() AareGuruResponse {
 		json.Unmarshal(data, &aareGuruResponse)
 	}
 
-	return aareGuruResponse
+	aareGuruResponseChannel <- aareGuruResponse
 }
