@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"../config"
 	"../texts"
+	. "github.com/logrusorgru/aurora"
 )
 
 type AareGuruResponse struct {
@@ -22,8 +23,6 @@ type Aare struct {
 	Temperature_text string
 	Flow             float32
 	Flow_text        string
-	Forecast2h       float32
-	Forecast2h_text  string
 }
 
 type Weather struct {
@@ -50,7 +49,7 @@ func AskAareGuru() AareGuruResponse {
 
 	response, err := http.Get(config.Endpoint_url)
 	if err != nil {
-		fmt.Println(texts.Error_msg)
+		fmt.Println(Red(texts.Error_msg))
 		panic(err)
 	} else {
 		data, err := ioutil.ReadAll(response.Body)
