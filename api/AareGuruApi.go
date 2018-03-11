@@ -23,8 +23,9 @@ type Aare struct {
 }
 
 type Weather struct {
-	Current WeatherInfos
-	Today   WeatherToday
+	Current  WeatherInfos
+	Today    WeatherToday
+	Location string
 }
 
 type WeatherToday struct {
@@ -41,13 +42,13 @@ type WeatherInfos struct {
 	Rrisk int16
 }
 
-func AskAareGuru(aareGuruResponseChannel chan<-AareGuruResponse, errChannel chan<-string) {
+func AskAareGuru(aareGuruResponseChannel chan<- AareGuruResponse, errChannel chan<- string) {
 	defer func() {
 		if r := recover(); r != nil {
 			errChannel <- ""
 		}
 	}()
-	
+
 	var aareGuruResponse AareGuruResponse
 
 	response, err := http.Get(config.Endpoint_url)

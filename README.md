@@ -49,5 +49,6 @@ entpacksches nöime und laschs loufe. Viläch wosches ja o zum PATH hinzuefüege
 
 * https://github.com/goreleaser/goreleaser
 * https://github.com/logrusorgru/aurora
+* https://github.com/cheggaaa/pb
 * https://github.com/lukesampson/scoop
 * https://github.com/Homebrew/brew/
