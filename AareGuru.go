@@ -53,6 +53,7 @@ func main() {
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, bar)
 
 	if bar.IsFinished() {
+		fmt.Println()
 		output_simple.PrintBanner()
 		output_simple.PrintOutput(*aareGuruResponse)
 	} else {
