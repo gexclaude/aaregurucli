@@ -4,7 +4,6 @@ import (
 	"os/exec"
 	"os"
 	"runtime"
-	"bufio"
 	"fmt"
 	. "github.com/logrusorgru/aurora"
 )
@@ -31,10 +30,10 @@ func InitConsole(coloredParam bool) {
 }
 
 func BeforeExitConsole() {
-	if runtime.GOOS == "windows" {
+	/*if runtime.GOOS == "windows" {
 		fmt.Println("Press any key...")
 		bufio.NewReader(os.Stdin).ReadBytes('\n')
-	}
+	}*/
 }
 
 func ClearConsole() {
@@ -86,9 +85,18 @@ func CGreen(arg string) string {
 		return arg
 	}
 }
+
 func CGray(arg string) string {
 	if isColored() {
 		return Gray(arg).String()
+	} else {
+		return arg
+	}
+}
+
+func CBrown(arg string) string {
+	if isColored() {
+		return Brown(arg).String()
 	} else {
 		return arg
 	}

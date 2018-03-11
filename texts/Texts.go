@@ -33,23 +33,22 @@ const Error_Hints_msg = `* Bisch auefaus hingeremne proxy? Probiere mau dr Proxy
 var WeatherSympolTexts map[int16]string = createWeatherSymbolTextMapping()
 func createWeatherSymbolTextMapping() map[int16]string {
 	var m map[int16]string = make(map[int16]string)
-	// TODO replace with bärndütsch
 	m[0] = "n/a"
-	m[1] = "sonnig"
-	m[2] = "ziemlich sonnig"
-	m[3] = "bewölkt"
-	m[4] = "stark bewölkt"
-	m[5] = "Wärmegewitter"
-	m[6] = "starker Regen"
-	m[7] = "Schneefall"
-	m[8] = "Nebel"
-	m[9] = "Schneeregen"
-	m[10] = "Regenschauer"
-	m[11] = "leichter Regen"
-	m[12] = "Schneeschauer"
-	m[13] = "Frontgewitter"
-	m[14] = "Hochnebel"
-	m[15] = "Schneeregenschauer"
+	m[1] = "sunnig"
+	m[2] = "zimlech sunnig"
+	m[3] = "bewöukt"
+	m[4] = "starch bewöukt"
+	m[5] = "wärmegwitter"
+	m[6] = "starche räge"
+	m[7] = "schneefau"
+	m[8] = "näbu"
+	m[9] = "schneeräge"
+	m[10] = "e gutsch"
+	m[11] = "liechts rägeli"
+	m[12] = "es flöcklet e chli"
+	m[13] = "frontgwitter"
+	m[14] = "hochnäbu"
+	m[15] = "es schneerägeli"
 	return m
 }
 

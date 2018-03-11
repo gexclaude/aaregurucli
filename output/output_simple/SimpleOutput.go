@@ -73,9 +73,9 @@ func printNVA(weatherToday api.WeatherToday) {
 func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
 
 	col1 := col1_text
-	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2_text, CRed(fmt.Sprintf("%4.1f", info.Tt)), CGreen(fmt.Sprintf("%2d", info.Rr)), CGray(fmt.Sprintf("%2d", info.Rrisk)))
+	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2_text, CRed(fmt.Sprintf("%4.1f", info.Tt)), CGreen(fmt.Sprintf("%2d", info.Rr)), CBrown(fmt.Sprintf("%2d", info.Rrisk)))
 	col3 := texts.WeatherSympolTexts[info.Symt]
-	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), CRed(""), CGreen(""), CGray(""))
+	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), CRed(""), CGreen(""), CBrown(""))
 }
 
 func box_horizontal_line() string {
