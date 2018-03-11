@@ -46,6 +46,12 @@ func ClearConsole() {
 	}
 }
 
+// color detection
+
+func SupportsColors() {
+	os.Getenv("COLORTERM")
+}
+
 // ---
 
 func CBgBlue(arg string) string {
