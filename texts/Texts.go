@@ -19,7 +19,7 @@ const Nva_afternoon = "Nami"
 const Nva_evening = "Abe"
 const Nva_caption = "X° = Temp. / Ymm = Rägemängi / Z%% = Rägewahrschindlechkeit"
 
-const Footer = " https://aare.guru 👍  "
+const Footer = " https://aare.guru "
 
 const Loading_msg = "Louding "
 const Success_msg = "Söögsess!"
