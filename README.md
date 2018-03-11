@@ -10,7 +10,7 @@ Mit dere chasch ganz komod d Aare-Tämperatur, -Wassermängi u ds aktuelle bärn
 
 Obenuse, nid?
 
- 
+
 ## Mac: Mit brew aareguru kömerle
 
     brew tap gexclaude/homebrew-tap

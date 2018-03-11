@@ -34,12 +34,15 @@ func main() {
 	defer func() {
 		if r := recover(); r != nil {
 			bar.Finish()
-			fmt.Println()
-			fmt.Println(CRed(texts.Error_Detail_msg))
-			fmt.Println(r)
-			fmt.Println()
-			fmt.Print(texts.Error_Hints_msg)
-			fmt.Print()
+			// check for isFinished synchronized things
+			if bar.IsFinished() {
+				fmt.Println()
+				fmt.Println(CRed(texts.Error_Detail_msg))
+				fmt.Println(r)
+				fmt.Println()
+				fmt.Print(texts.Error_Hints_msg)
+				fmt.Print()
+			}
 		}
 		BeforeExitConsole()
 	}()
@@ -48,8 +51,12 @@ func main() {
 
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, bar)
 
-	output_simple.PrintBanner()
-	output_simple.PrintOutput(*aareGuruResponse)
+	if bar.IsFinished() {
+		output_simple.PrintBanner()
+		output_simple.PrintOutput(*aareGuruResponse)
+	} else {
+		fmt.Println(CRed("Oops"))
+	}
 }
 
 func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan string, bar *pb.ProgressBar) *api.AareGuruResponse {
