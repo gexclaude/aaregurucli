@@ -37,8 +37,10 @@ func printLastUpdateInformation(t time.Time, weather api.Weather) {
 func printAareTemperatureAndFlow(aare api.Aare) {
 	glasses := liter_to_glasses(m3_to_liter(aare.Flow))
 	glasses_text := strconv.Itoa(glasses)
-	// 123456 -> 123'456
-	glasses_text = glasses_text[:len(glasses_text)-3] + "'" + glasses_text[len(glasses_text)-3:]
+	if len(glasses_text) > 3 {
+		// 123456 -> 123'456
+		glasses_text = glasses_text[:len(glasses_text)-3] + "'" + glasses_text[len(glasses_text)-3:]
+	}
 
 	fmt.Println(box(
 		fmt.Sprintf("%-13s | %s %-4s - %s",

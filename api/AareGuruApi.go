@@ -44,7 +44,7 @@ type WeatherInfos struct {
 	Rrisk int16
 }
 
-func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse, errChannel chan<- string) {
+func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse, errChannel chan<- string, debug bool) {
 	defer func() {
 		if r := recover(); r != nil {
 			errChannel <- fmt.Sprintf("%s", r)
@@ -59,12 +59,20 @@ func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse,
 	if err != nil { 
 		panic(err)
 	} else {
+		if (debug) {
+			fmt.Printf("Status: %s\n", response.Status)
+		}
 		data, err := ioutil.ReadAll(response.Body)
 		if (err != nil) {
 			panic(err)
 		}
 
 		json.Unmarshal(data, &aareGuruResponse)
+
+		if (debug) {
+			fmt.Printf("Raw: %s\n", string(data))
+			fmt.Printf("Response: %s\n", aareGuruResponse)
+		}
 	}
 
 	aareGuruResponseChannel <- aareGuruResponse

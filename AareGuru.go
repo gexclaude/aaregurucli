@@ -18,6 +18,7 @@ var (
 	app = kingpin.New("aareguru", texts.CLI_description)
 	proxy = app.Flag("proxy", texts.CLI_proxy_description).Short('p').String()
 	colorless = app.Flag("ohni-faarb", texts.CLI_colorless_description).Short('o').Bool()
+	debug = app.Flag("debug", texts.CLI_proxy_description).Short('d').Hidden().Bool()
 )
 
 func main() {
@@ -47,7 +48,7 @@ func main() {
 		BeforeExitConsole()
 	}()
 
-	go api.AskAareGuru(proxy, aareGuruResponseChannel, errChannel)
+	go api.AskAareGuru(proxy, aareGuruResponseChannel, errChannel, *debug)
 
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, bar)
 

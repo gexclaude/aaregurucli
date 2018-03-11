@@ -32,6 +32,7 @@ func InitConsole(coloredParam bool) {
 
 func BeforeExitConsole() {
 	if runtime.GOOS == "windows" {
+		fmt.Println("Press any key...")
 		bufio.NewReader(os.Stdin).ReadBytes('\n')
 	}
 }
