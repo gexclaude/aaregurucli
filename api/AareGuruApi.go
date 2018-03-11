@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"../config"
+	"net/url"
+	"fmt"
 )
 
 type AareGuruResponse struct {
@@ -42,17 +44,19 @@ type WeatherInfos struct {
 	Rrisk int16
 }
 
-func AskAareGuru(aareGuruResponseChannel chan<- AareGuruResponse, errChannel chan<- string) {
+func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse, errChannel chan<- string) {
 	defer func() {
 		if r := recover(); r != nil {
-			errChannel <- ""
+			errChannel <- fmt.Sprintf("%s", r)
 		}
 	}()
 
 	var aareGuruResponse AareGuruResponse
 
-	response, err := http.Get(config.Endpoint_url)
-	if err != nil {
+	client := createHttpClient(proxy)
+
+	response, err := client.Get(config.Endpoint_url)
+	if err != nil { 
 		panic(err)
 	} else {
 		data, err := ioutil.ReadAll(response.Body)
@@ -64,4 +68,17 @@ func AskAareGuru(aareGuruResponseChannel chan<- AareGuruResponse, errChannel cha
 	}
 
 	aareGuruResponseChannel <- aareGuruResponse
+}
+func createHttpClient(proxy *string) *http.Client {
+	var myHttpClient *http.Client
+	if *proxy == "" {
+		myHttpClient = &http.Client{}
+	} else {
+		proxyUrl, err := url.Parse(*proxy)
+		if err != nil {
+			panic(err)
+		}
+		myHttpClient = &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyUrl)}}
+	}
+	return myHttpClient
 }

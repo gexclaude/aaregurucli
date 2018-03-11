@@ -16,6 +16,7 @@ const progressBarCount = 100
 
 var (
 	app = kingpin.New("aareguru", texts.CLI_description)
+	proxy = app.Flag("proxy", texts.CLI_proxy_description).Short('p').String()
 	colorless = app.Flag("ohni-faarb", texts.CLI_colorless_description).Short('o').Bool()
 )
 
@@ -34,14 +35,16 @@ func main() {
 		if r := recover(); r != nil {
 			bar.Finish()
 			fmt.Println()
-			fmt.Println(CRed(texts.Error_Detail_msg), r)
+			fmt.Println(CRed(texts.Error_Detail_msg))
+			fmt.Println(r)
+			fmt.Println()
 			fmt.Print(texts.Error_Hints_msg)
 			fmt.Print()
 		}
 		BeforeExitConsole()
 	}()
 
-	go api.AskAareGuru(aareGuruResponseChannel, errChannel)
+	go api.AskAareGuru(proxy, aareGuruResponseChannel, errChannel)
 
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, bar)
 
@@ -58,8 +61,8 @@ func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan
 			select {
 			case tmp := <-aareGuruResponseChannel:
 				aareGuruResponse = &tmp
-			case <-errChannel:
-				panic("")
+			case err := <- errChannel:
+				panic(err)
 			}
 		}
 

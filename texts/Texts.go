@@ -26,7 +26,7 @@ const Success_msg = "Söögsess!"
 
 const Error_msg = "Dr aare.guru isch verärgeret. Är git üs kei antwort meh."
 const Error_Detail_msg = "Nachfolgends isch dr detailliert Fehler: "
-const Error_Hints_msg = `* Bisch auefaus hingeremne proxy? Probiere mau d umgäbigsvariable 'HTTP_PROXY=di-leidig-proxy:80' ds setze
+const Error_Hints_msg = `* Bisch auefaus hingeremne proxy? Probiere mau dr Proxy mit --proxy http://di-leidig-proxy:8080 adsgä
 * Oder hesch no e auti Version? Due mau aktualisiere
 `
 
@@ -61,4 +61,5 @@ Obenuse, nid?
 
 https://aare.guru`
 
+const CLI_proxy_description = "Proxy URL - bspw. http://di-leidig-proxy:8080"
 const CLI_colorless_description = "Faarbloosi Usgaab"
