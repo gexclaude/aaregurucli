@@ -2,20 +2,28 @@ package main
 
 import (
 	"fmt"
+	"time"
 	"./api"
-	"./console"
 	"./texts"
 	"./output/output_simple"
-	. "github.com/logrusorgru/aurora"
+	. "./console"
 	"gopkg.in/cheggaaa/pb.v1"
-	"time"
+	"gopkg.in/alecthomas/kingpin.v2"
+	"os"
 )
 
 const progressBarCount = 100
 
+var (
+	app = kingpin.New("aareguru", texts.CLI_description)
+	colorless = app.Flag("ohni-faarb", texts.CLI_colorless_description).Short('o').Bool()
+)
+
 func main() {
-	console.Init()
-	console.CallClear()
+	kingpin.MustParse(app.Parse(os.Args[1:]))
+
+	InitConsole(!*colorless)
+	ClearConsole()
 
 	aareGuruResponseChannel := make(chan api.AareGuruResponse)
 	errChannel := make(chan string)
@@ -26,11 +34,11 @@ func main() {
 		if r := recover(); r != nil {
 			bar.Finish()
 			fmt.Println()
-			fmt.Println(Red(texts.Error_Detail_msg), r)
+			fmt.Println(CRed(texts.Error_Detail_msg), r)
 			fmt.Print(texts.Error_Hints_msg)
 			fmt.Print()
 		}
-		console.BeforeExit()
+		BeforeExitConsole()
 	}()
 
 	go api.AskAareGuru(aareGuruResponseChannel, errChannel)
@@ -40,6 +48,7 @@ func main() {
 	output_simple.PrintBanner()
 	output_simple.PrintOutput(*aareGuruResponse)
 }
+
 func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan string, bar *pb.ProgressBar) *api.AareGuruResponse {
 	var aareGuruResponse *api.AareGuruResponse
 	i := 0
@@ -57,9 +66,6 @@ func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan
 		increaseBar(bar, i)
 	}
 	if aareGuruResponse == nil {
-		fmt.Println("wtf")
-		fmt.Println("wtf")
-		fmt.Println("wtf")
 		tmp := <-aareGuruResponseChannel
 		aareGuruResponse = &tmp
 	}
@@ -67,9 +73,9 @@ func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan
 	for ; i < progressBarCount; i++ {
 		increaseBar(bar, i)
 	}
-	bar.FinishPrint(Green(texts.Success_msg).String())
+	bar.FinishPrint(CGreen(texts.Success_msg))
 	fmt.Println()
-	
+
 	return aareGuruResponse
 }
 
@@ -87,12 +93,11 @@ func createBar() *pb.ProgressBar {
 
 func increaseBar(bar *pb.ProgressBar, i int) {
 	bar.Increment()
-	if i < progressBarCount * 0.5 {
+	if i < progressBarCount*0.5 {
 		time.Sleep(time.Millisecond * 4)
-	} else if i < progressBarCount * 0.7 {
-			time.Sleep(time.Millisecond * 6)
+	} else if i < progressBarCount*0.7 {
+		time.Sleep(time.Millisecond * 6)
 	} else {
 		time.Sleep(time.Millisecond * 7)
 	}
 }
-

@@ -6,7 +6,7 @@ Wär isch de dä aare.guru? Lue hie: https://aare.guru
 
 ## Was chani mit dr aare.guru CLI äpp?
 
-Mit dere chasch ganz komod d Aare-Tämperatur und Wassermängi i dire befälszyle abfragä - u das i gwaneter aare.guru qualität.
+Mit dere chasch ganz komod d Aare-Tämperatur, -Wassermängi u ds aktuelle bärner Wätter i dire Befählszyle abfragä - u das i gwaneter aare.guru Qualität.
 
 Obenuse, nid?
 
@@ -50,5 +50,6 @@ entpacksches nöime und laschs loufe. Viläch wosches ja o zum PATH hinzuefüege
 * https://github.com/goreleaser/goreleaser
 * https://github.com/logrusorgru/aurora
 * https://github.com/cheggaaa/pb
+* https://github.com/alecthomas/kingpin
 * https://github.com/lukesampson/scoop
 * https://github.com/Homebrew/brew/

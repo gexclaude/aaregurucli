@@ -29,6 +29,7 @@ const Error_Detail_msg = "Nachfolgends isch dr detailliert Fehler: "
 const Error_Hints_msg = `* Bisch auefaus hingeremne proxy? Probiere mau d umgäbigsvariable 'HTTP_PROXY=di-leidig-proxy:80' ds setze
 * Oder hesch no e auti Version? Due mau aktualisiere
 `
+
 var WeatherSympolTexts map[int16]string = createWeatherSymbolTextMapping()
 func createWeatherSymbolTextMapping() map[int16]string {
 	var m map[int16]string = make(map[int16]string)
@@ -51,3 +52,13 @@ func createWeatherSymbolTextMapping() map[int16]string {
 	m[15] = "Schneeregenschauer"
 	return m
 }
+
+// CLI help
+
+const CLI_description = `Mit däm aare guru CLI Wärchzüg chasch ganz komod d Aare-Tämperatur, -Wassermängi u ds aktuelle bärner Wätter i dire Befählszyle abfragä - u das i gwaneter aare.guru Qualität.
+
+Obenuse, nid?
+
+https://aare.guru`
+
+const CLI_colorless_description = "Faarbloosi Usgaab"

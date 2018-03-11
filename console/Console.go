@@ -6,12 +6,16 @@ import (
 	"runtime"
 	"bufio"
 	"fmt"
+	. "github.com/logrusorgru/aurora"
 )
 
 // source: https://stackoverflow.com/questions/22891644/how-can-i-clear-the-terminal-screen-in-go
 var clear map[string]func() //create a map for storing clear funcs
+var colored = true
 
-func Init() {
+func InitConsole(coloredParam bool) {
+	colored = coloredParam
+	
 	clear = make(map[string]func()) //Initialize it
 	clear["linux"] = func() {
 		cmd := exec.Command("clear") //Linux example, its tested
@@ -26,13 +30,13 @@ func Init() {
 	}
 }
 
-func BeforeExit() {
+func BeforeExitConsole() {
 	if runtime.GOOS == "windows" {
 		bufio.NewReader(os.Stdin).ReadBytes('\n')
 	}
 }
 
-func CallClear() {
+func ClearConsole() {
 	value, ok := clear[runtime.GOOS] //runtime.GOOS -> linux, windows, darwin etc.
 	if ok { //if we defined a clear func for that platform:
 		value() //we execute it
@@ -43,3 +47,46 @@ func CallClear() {
 }
 
 // ---
+
+func CBgBlue(arg string) string {
+	if isColored() {
+		return BgBlue(arg).String()
+	} else {
+		return arg
+	}
+}
+
+func CBlue(arg string) string {
+	if isColored() {
+		return Blue(arg).String()
+	} else {
+		return arg
+	}
+}
+
+func CRed(arg string) string {
+	if isColored() {
+		return Red(arg).String()
+	} else {
+		return arg
+	}
+}
+
+func CGreen(arg string) string {
+	if isColored() {
+		return Green(arg).String()
+	} else {
+		return arg
+	}
+}
+func CGray(arg string) string {
+	if isColored() {
+		return Gray(arg).String()
+	} else {
+		return arg
+	}
+}
+
+func isColored() bool {
+	return colored
+}

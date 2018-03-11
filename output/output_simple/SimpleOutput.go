@@ -2,17 +2,17 @@ package output_simple
 
 import (
 	"fmt"
-	"time"
 	"math/rand"
+	"strconv"
+	"time"
 	"../../asciiart"
 	"../../api"
 	"../../texts"
-	. "github.com/logrusorgru/aurora"
-	"strconv"
+	. "../../console"
 )
 
 func PrintBanner() {
-	fmt.Print(Blue(asciiart.Banner))
+	fmt.Print(CBlue(asciiart.Banner))
 }
 
 func PrintOutput(aareGuruResponse api.AareGuruResponse) {
@@ -25,7 +25,7 @@ func PrintOutput(aareGuruResponse api.AareGuruResponse) {
 	printAareTemperatureAndFlow(aare)
 	printNVA(weather.Today)
 	fmt.Println()
-	fmt.Println(BgBlue((Gray((texts.Footer)))))
+	fmt.Println(CBgBlue(CGray(texts.Footer)))
 	fmt.Println()
 }
 
@@ -40,8 +40,22 @@ func printAareTemperatureAndFlow(aare api.Aare) {
 	// 123456 -> 123'456
 	glasses_text = glasses_text[:len(glasses_text)-3] + "'" + glasses_text[len(glasses_text)-3:]
 
-	fmt.Println(box(fmt.Sprintf("%-13s | %5.1f %-4s - %s", texts.Water_temperature_label, Blue(aare.Temperature), texts.Degree_celsius_label, aare.Temperature_text), Blue("")))
-	fmt.Println(box(fmt.Sprintf("%-13s | %5.0f %4s - %s (%s %s)", texts.Water_flow_label, Blue(aare.Flow), texts.Cubic_metre_per_second_label, aare.Flow_text, glasses_text, random_flow_in_glasses_text()), Blue("")))
+	fmt.Println(box(
+		fmt.Sprintf("%-13s | %s %-4s - %s",
+			texts.Water_temperature_label,
+			CBlue(fmt.Sprintf("%5.1f", aare.Temperature)),
+			texts.Degree_celsius_label,
+			aare.Temperature_text),
+		CBlue("")))
+		
+	fmt.Println(box(
+		fmt.Sprintf("%-13s | %s %4s - %s (%s %s)",
+			texts.Water_flow_label,
+			CBlue(fmt.Sprintf("%5.0f", aare.Flow)),
+			texts.Cubic_metre_per_second_label,
+			aare.Flow_text, glasses_text,
+			random_flow_in_glasses_text()),
+		CBlue("")))
 }
 
 func printNVA(weatherToday api.WeatherToday) {
@@ -57,23 +71,23 @@ func printNVA(weatherToday api.WeatherToday) {
 func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
 
 	col1 := col1_text
-	col2 := fmt.Sprintf("%-6s: %4.1f° / %2dmm / %2d%%", col2_text, Red(info.Tt), Green(info.Rr), Gray(info.Rrisk))
+	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2_text, CRed(fmt.Sprintf("%4.1f", info.Tt)), CGreen(fmt.Sprintf("%2d", info.Rr)), CGray(fmt.Sprintf("%2d", info.Rrisk)))
 	col3 := texts.WeatherSympolTexts[info.Symt]
-	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), Red(""), Green(""), Gray(""))
+	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), CRed(""), CGreen(""), CGray(""))
 }
 
 func box_horizontal_line() string {
 	return "+------------------------------------------------------------------------+"
 }
 
-func box(str string, colorChars ...fmt.Stringer) string {
+func box(str string, colorChars ...string) string {
 	return fmt.Sprintf("| %-"+strconv.Itoa(70+colorCharsLength(colorChars...))+"s |", str)
 }
 
-func colorCharsLength(colorChars ...fmt.Stringer) int {
+func colorCharsLength(colorChars ...string) int {
 	var colorCharsLen = 0
 	for _, element := range colorChars {
-		colorCharsLen += len(element.String())
+		colorCharsLen += len(element)
 	}
 	return colorCharsLen
 }
