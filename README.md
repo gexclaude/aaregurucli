@@ -51,7 +51,7 @@ Mit Powershell 3 geit das so:
 
     iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
     
-U faus de ne Proxy bruchsch machsch es eso:
+U faus de ne Proxy bruchsch machsches eso:
 
     $browser = New-Object System.Net.WebClient
     $browser.Proxy.Credentials =[System.Net.CredentialCache]::DefaultNetworkCredentials
