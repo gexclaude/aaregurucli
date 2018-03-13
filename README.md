@@ -51,6 +51,12 @@ Mit Powershell 3 geit das so:
 
     iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
     
+U faus de ne Proxy bruchsch machsches eso:
+
+    $browser = New-Object System.Net.WebClient
+    $browser.Proxy.Credentials =[System.Net.CredentialCache]::DefaultNetworkCredentials
+    iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+    
 Denn duesch dr Chessu drzue und laschs la tschädere
 
     scoop bucket add aareguru https://github.com/gexclaude/scoop-bucket
