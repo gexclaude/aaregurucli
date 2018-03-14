@@ -16,9 +16,13 @@ Usfüüährig uf dr Kommandozile wie fougt:
 
     aareguru
 
-Spicke duesch so:
+Spicke duesch grundsätzläch so:
 
     aareguru --help
+
+Wede e proxy bruchsch
+
+    aareguru --proxy http://<host>:<port>
 
 ## Mac: Mit brew aareguru kömerle
 
@@ -56,6 +60,9 @@ U faus de ne Proxy bruchsch machsches eso:
     $browser = New-Object System.Net.WebClient
     $browser.Proxy.Credentials =[System.Net.CredentialCache]::DefaultNetworkCredentials
     iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+    scoop config proxy <host>:<port>
+
+Je nachdem hiuft dr dr CNTLM Proxy: http://cntlm.sourceforge.net/
     
 Denn duesch dr Chessu drzue und laschs la tschädere
 
