@@ -38,6 +38,7 @@ type WeatherToday struct {
 
 type WeatherInfos struct {
 	Sy    string
+	Syt   string
 	Symt  int16
 	Tt    float32
 	Rr    int16
