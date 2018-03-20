@@ -125,11 +125,11 @@ func increaseBar(bar *uiprogress.Bar, i int) {
 	if (isProgressBar()) {
 		bar.Incr()
 		if i < progressBarCount*0.5 {
-			time.Sleep(time.Millisecond * 4)
+			time.Sleep(time.Millisecond * 2)
 		} else if i < progressBarCount*0.7 {
-			time.Sleep(time.Millisecond * 6)
+			time.Sleep(time.Millisecond * 3)
 		} else {
-			time.Sleep(time.Millisecond * 7)
+			time.Sleep(time.Millisecond * 4)
 		}
 	}
 }
