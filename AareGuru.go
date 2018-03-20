@@ -108,6 +108,7 @@ func createBar() *uiprogress.Bar {
 	}
 
 	bar := uiprogress.AddBar(progressBarCount).AppendCompleted().PrependElapsed()
+	bar.Width = 45
 	bar.PrependFunc(func(b *uiprogress.Bar) string {
 		return fmt.Sprintf("%s (%d/%d)", texts.Loading_msg, b.Current(), progressBarCount)
 	})
