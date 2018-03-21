@@ -11,6 +11,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 	"sync"
+	"strconv"
 )
 
 const progressBarCount = 100
@@ -28,6 +29,7 @@ func main() {
 
 	InitConsole(!*colorless)
 	ClearConsole()
+	fmt.Println()
 
 	aareGuruResponseChannel := make(chan api.AareGuruResponse)
 	errChannel := make(chan string)
@@ -55,8 +57,8 @@ func main() {
 	}()
 
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, bar, &wg)
-
-	fmt.Println()
+	
+	fmt.Println(output_simple.Box_horizontal_line())
 	output_simple.PrintBanner()
 	output_simple.PrintOutput(*aareGuruResponse)
 }
@@ -88,9 +90,6 @@ func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan
 	wg.Wait()
 	stopBar()
 
-	fmt.Println(CGreen(texts.Success_msg))
-	fmt.Println()
-
 	return aareGuruResponse
 }
 
@@ -107,10 +106,20 @@ func createBar() *uiprogress.Bar {
 		return nil;
 	}
 
+	fmt.Println(output_simple.Box_horizontal_line())
 	bar := uiprogress.AddBar(progressBarCount).AppendCompleted().PrependElapsed()
 	bar.Width = 45
 	bar.PrependFunc(func(b *uiprogress.Bar) string {
-		return fmt.Sprintf("%s (%d/%d)", texts.Loading_msg, b.Current(), progressBarCount)
+		msg :=  texts.Loading_msg
+		len := 9
+		if b.Current() == progressBarCount {
+			msg = CGreen(texts.Success_msg)
+			len += output_simple.ColorCharsLength(CGreen(""))
+		}
+		return fmt.Sprintf("| %-" + strconv.Itoa(len) + "s %3d", msg, b.Current())
+	})
+	bar.AppendFunc(func(b *uiprogress.Bar) string {
+		return fmt.Sprintf("|")
 	})
 	uiprogress.Start()
 	return bar

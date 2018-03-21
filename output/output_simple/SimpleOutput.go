@@ -31,7 +31,7 @@ func PrintOutput(aareGuruResponse api.AareGuruResponse) {
 
 func printLastUpdateInformation(t time.Time, weather api.Weather) {
 	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d (%s)", texts.Current_title, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location)))
-	fmt.Println(box_horizontal_line())
+	fmt.Println(Box_horizontal_line())
 }
 
 func printAareTemperatureAndFlow(aare api.Aare) {
@@ -61,13 +61,13 @@ func printAareTemperatureAndFlow(aare api.Aare) {
 }
 
 func printNVA(weatherToday api.WeatherToday) {
-	fmt.Println(box_horizontal_line())
+	fmt.Println(Box_horizontal_line())
 	fmt.Println(nva_row(texts.Nva_title_1st_row, texts.Nva_morning, weatherToday.V))
 	fmt.Println(nva_row(texts.Nva_title_2nd_row, texts.Nva_afternoon, weatherToday.N))
 	fmt.Println(nva_row("", texts.Nva_evening, weatherToday.A))
-	fmt.Println(box_horizontal_line())
+	fmt.Println(Box_horizontal_line())
 	fmt.Println(box(fmt.Sprintf(texts.Nva_caption)))
-	fmt.Println(box_horizontal_line())
+	fmt.Println(Box_horizontal_line())
 }
 
 func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
@@ -78,15 +78,15 @@ func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
 	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), CRed(""), CGreen(""), CBrown(""))
 }
 
-func box_horizontal_line() string {
+func Box_horizontal_line() string {
 	return "+------------------------------------------------------------------------+"
 }
 
 func box(str string, colorChars ...string) string {
-	return fmt.Sprintf("| %-"+strconv.Itoa(70+colorCharsLength(colorChars...))+"s |", str)
+	return fmt.Sprintf("| %-"+strconv.Itoa(70+ColorCharsLength(colorChars...))+"s |", str)
 }
 
-func colorCharsLength(colorChars ...string) int {
+func ColorCharsLength(colorChars ...string) int {
 	var colorCharsLen = 0
 	for _, element := range colorChars {
 		colorCharsLen += len(element)
