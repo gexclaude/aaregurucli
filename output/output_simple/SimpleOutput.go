@@ -9,13 +9,102 @@ import (
 	"../../api"
 	"../../texts"
 	. "../../console"
+	"github.com/gosuri/uiprogress"
+	"sync"
 )
 
-func PrintBanner() {
-	fmt.Print(CBlue(asciiart.Banner))
+const progressBarCount = 100
+
+var bar *uiprogress.Bar
+var progressbar = true
+
+func Init(withProgressBar bool) {
+	progressbar = withProgressBar
+	bar = createBar()
 }
 
-func PrintOutput(aareGuruResponse api.AareGuruResponse) {
+func RenderAareGuruResponse(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan string, wg *sync.WaitGroup) {
+	fmt.Println(boxHorizontalLine())
+	fmt.Print(CBlue(asciiart.Banner))
+	fmt.Println(boxHorizontalLine())
+
+	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, wg)
+	printOutput(*aareGuruResponse)
+}
+
+func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan string, wg *sync.WaitGroup) *api.AareGuruResponse {
+	var aareGuruResponse *api.AareGuruResponse
+	i := 0
+	// only first part of progress bar
+	for ; progressbar && i < progressBarCount-int(progressBarCount*.75); i++ {
+		if aareGuruResponse == nil {
+			select {
+			case tmp := <-aareGuruResponseChannel:
+				aareGuruResponse = &tmp
+			case err := <-errChannel:
+				panic(err)
+			}
+		}
+
+		increaseBar(bar, i)
+	}
+	if aareGuruResponse == nil {
+		tmp := <-aareGuruResponseChannel
+		aareGuruResponse = &tmp
+	}
+	// rest of progress bar
+	for ; progressbar && i < progressBarCount; i++ {
+		increaseBar(bar, i)
+	}
+	wg.Wait()
+	stopBar()
+
+	return aareGuruResponse
+}
+
+func createBar() *uiprogress.Bar {
+	if (!progressbar) {
+		return nil;
+	}
+
+	bar := uiprogress.AddBar(progressBarCount).AppendCompleted().PrependElapsed()
+	bar.Width = 45
+	bar.PrependFunc(func(b *uiprogress.Bar) string {
+		msg :=  texts.Loading_msg
+		len := 9
+		if b.Current() == progressBarCount {
+			msg = CGreen(texts.Success_msg)
+			len += colorCharsLength(CGreen(""))
+		}
+		return fmt.Sprintf("| %-" + strconv.Itoa(len) + "s %3d", msg, b.Current())
+	})
+	bar.AppendFunc(func(b *uiprogress.Bar) string {
+		return fmt.Sprintf("|")
+	})
+	uiprogress.Start()
+	return bar
+}
+
+func stopBar() {
+	if (progressbar) {
+		uiprogress.Stop()
+	}
+}
+
+func increaseBar(bar *uiprogress.Bar, i int) {
+	if (progressbar) {
+		bar.Incr()
+		if i < progressBarCount*0.5 {
+			time.Sleep(time.Millisecond * 2)
+		} else if i < progressBarCount*0.7 {
+			time.Sleep(time.Millisecond * 3)
+		} else {
+			time.Sleep(time.Millisecond * 4)
+		}
+	}
+}
+
+func printOutput(aareGuruResponse api.AareGuruResponse) {
 	aare := aareGuruResponse.Aare
 	weather := aareGuruResponse.Weather
 
@@ -31,7 +120,7 @@ func PrintOutput(aareGuruResponse api.AareGuruResponse) {
 
 func printLastUpdateInformation(t time.Time, weather api.Weather) {
 	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d (%s)", texts.Current_title, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location)))
-	fmt.Println(Box_horizontal_line())
+	fmt.Println(boxHorizontalLine())
 }
 
 func printAareTemperatureAndFlow(aare api.Aare) {
@@ -61,13 +150,13 @@ func printAareTemperatureAndFlow(aare api.Aare) {
 }
 
 func printNVA(weatherToday api.WeatherToday) {
-	fmt.Println(Box_horizontal_line())
+	fmt.Println(boxHorizontalLine())
 	fmt.Println(nva_row(texts.Nva_title_1st_row, texts.Nva_morning, weatherToday.V))
 	fmt.Println(nva_row(texts.Nva_title_2nd_row, texts.Nva_afternoon, weatherToday.N))
 	fmt.Println(nva_row("", texts.Nva_evening, weatherToday.A))
-	fmt.Println(Box_horizontal_line())
+	fmt.Println(boxHorizontalLine())
 	fmt.Println(box(fmt.Sprintf(texts.Nva_caption)))
-	fmt.Println(Box_horizontal_line())
+	fmt.Println(boxHorizontalLine())
 }
 
 func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
@@ -78,15 +167,15 @@ func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
 	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), CRed(""), CGreen(""), CBrown(""))
 }
 
-func Box_horizontal_line() string {
+func boxHorizontalLine() string {
 	return "+------------------------------------------------------------------------+"
 }
 
 func box(str string, colorChars ...string) string {
-	return fmt.Sprintf("| %-"+strconv.Itoa(70+ColorCharsLength(colorChars...))+"s |", str)
+	return fmt.Sprintf("| %-"+strconv.Itoa(70+colorCharsLength(colorChars...))+"s |", str)
 }
 
-func ColorCharsLength(colorChars ...string) int {
+func colorCharsLength(colorChars ...string) int {
 	var colorCharsLen = 0
 	for _, element := range colorChars {
 		colorCharsLen += len(element)
