@@ -2,13 +2,13 @@ package output_simple
 
 import (
 	"fmt"
-	"math/rand"
 	"strconv"
 	"time"
 	"../../asciiart"
 	"../../api"
 	"../../texts"
 	. "../../console"
+	. "../output_common"
 	"github.com/gosuri/uiprogress"
 	"sync"
 )
@@ -27,6 +27,13 @@ func RenderAareGuruResponse(aareGuruResponseChannel chan api.AareGuruResponse, e
 	fmt.Println(boxHorizontalLine())
 	fmt.Print(CBlue(asciiart.Banner))
 	fmt.Println(boxHorizontalLine())
+
+	defer func() {
+		if r := recover(); r != nil {
+			uiprogress.Stop()
+			panic(r)
+		}
+	}()
 
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, wg)
 	printOutput(*aareGuruResponse)
@@ -70,13 +77,13 @@ func createBar() *uiprogress.Bar {
 	bar := uiprogress.AddBar(progressBarCount).AppendCompleted().PrependElapsed()
 	bar.Width = 45
 	bar.PrependFunc(func(b *uiprogress.Bar) string {
-		msg :=  texts.Loading_msg
+		msg := texts.Loading_msg
 		len := 9
 		if b.Current() == progressBarCount {
 			msg = CGreen(texts.Success_msg)
 			len += colorCharsLength(CGreen(""))
 		}
-		return fmt.Sprintf("| %-" + strconv.Itoa(len) + "s %3d", msg, b.Current())
+		return fmt.Sprintf("| %-"+strconv.Itoa(len)+"s %3d", msg, b.Current())
 	})
 	bar.AppendFunc(func(b *uiprogress.Bar) string {
 		return fmt.Sprintf("|")
@@ -114,7 +121,7 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	printAareTemperatureAndFlow(aare)
 	printNVA(weather.Today)
 	fmt.Println()
-	fmt.Println(CBgBlue(CGray(texts.Footer)))
+	fmt.Println(CBgBlue(CGray(fmt.Sprintf(" %s ", texts.Footer))))
 	fmt.Println()
 }
 
@@ -124,7 +131,7 @@ func printLastUpdateInformation(t time.Time, weather api.Weather) {
 }
 
 func printAareTemperatureAndFlow(aare api.Aare) {
-	glasses := liter_to_glasses(m3_to_liter(aare.Flow))
+	glasses := LiterToGlasses(M3toLiter(aare.Flow))
 	glasses_text := strconv.Itoa(glasses)
 	if len(glasses_text) > 3 {
 		// 123456 -> 123'456
@@ -133,19 +140,19 @@ func printAareTemperatureAndFlow(aare api.Aare) {
 
 	fmt.Println(box(
 		fmt.Sprintf("%-13s | %s %-4s - %s",
-			texts.Water_temperature_label,
+			texts.Water_label,
 			CBlue(fmt.Sprintf("%5.1f", aare.Temperature)),
 			texts.Degree_celsius_label,
 			aare.Temperature_text),
 		CBlue("")))
-		
+
 	fmt.Println(box(
 		fmt.Sprintf("%-13s | %s %4s - %s (%s %s)",
 			texts.Water_flow_label,
 			CBlue(fmt.Sprintf("%5.0f", aare.Flow)),
 			texts.Cubic_metre_per_second_label,
 			aare.Flow_text, glasses_text,
-			random_flow_in_glasses_text()),
+			RandomFlowInGlassesText()),
 		CBlue("")))
 }
 
@@ -155,7 +162,7 @@ func printNVA(weatherToday api.WeatherToday) {
 	fmt.Println(nva_row(texts.Nva_title_2nd_row, texts.Nva_afternoon, weatherToday.N))
 	fmt.Println(nva_row("", texts.Nva_evening, weatherToday.A))
 	fmt.Println(boxHorizontalLine())
-	fmt.Println(box(fmt.Sprintf(texts.Nva_caption)))
+	fmt.Println(box(texts.Nva_caption))
 	fmt.Println(boxHorizontalLine())
 }
 
@@ -181,25 +188,4 @@ func colorCharsLength(colorChars ...string) int {
 		colorCharsLen += len(element)
 	}
 	return colorCharsLen
-}
-
-func m3_to_liter(m3 float32) float32 {
-	return m3 * (10 * 10 * 10)
-}
-
-func liter_to_glasses(liter float32) int {
-	return int(liter / 0.3) // 3 dl
-}
-
-func random_flow_in_glasses_text() string {
-	if (rand_bool()) {
-		return texts.Flow_beer_label
-	} else {
-		return texts.Flow_siroop_label
-	}
-}
-
-func rand_bool() bool {
-	rand.Seed(time.Now().UnixNano())
-	return rand.Float32() < 0.5
 }

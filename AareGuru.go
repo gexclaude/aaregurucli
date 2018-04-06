@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"./api"
 	"./texts"
+	"./output/output_ticker"
 	"./output/output_simple"
 	. "./console"
-	"github.com/gosuri/uiprogress"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 	"sync"
@@ -14,6 +14,8 @@ import (
 
 var (
 	app           = kingpin.New("aareguru", texts.CLI_description)
+	standard      = app.Command("standard", texts.CLI_command_standard_description).Default()
+	typewriter    = app.Command("schribmaschine", texts.CLI_command_typewriter_description)
 	proxy         = app.Flag("proxy", texts.CLI_proxy_description).Short('p').String()
 	colorless     = app.Flag("ohni-farb", texts.CLI_colorless_description).Short('f').Bool()
 	noprogressbar = app.Flag("ohni-ladebauke", texts.CLI_noprogressbar_description).Short('l').Bool()
@@ -29,12 +31,11 @@ func main() {
 
 	aareGuruResponseChannel := make(chan api.AareGuruResponse)
 	errChannel := make(chan string)
-	
+
 	var wg sync.WaitGroup
 
 	defer func() {
 		if r := recover(); r != nil {
-			uiprogress.Stop()
 			fmt.Println()
 			fmt.Println(CRed(texts.Error_Detail_msg))
 			fmt.Println(r)
@@ -50,7 +51,13 @@ func main() {
 		wg.Add(1)
 		api.AskAareGuru(proxy, aareGuruResponseChannel, errChannel, *debug)
 	}()
-	
-	output_simple.Init(! *noprogressbar)
-	output_simple.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+
+	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
+	case standard.FullCommand():
+		output_simple.Init(! *noprogressbar)
+		output_simple.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+	case typewriter.FullCommand():
+		output_ticker.Init()
+		output_ticker.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+	}
 }
