@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"./api"
 	"./texts"
-	"./output/output_ticker"
-	"./output/output_simple"
+	"./output/output_typewriter"
+	"./output/output_standard"
 	. "./console"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
@@ -54,10 +54,10 @@ func main() {
 
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 	case standard.FullCommand():
-		output_simple.Init(! *noprogressbar)
-		output_simple.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		output_standard.Init(! *noprogressbar)
+		output_standard.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	case typewriter.FullCommand():
-		output_ticker.Init()
-		output_ticker.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		output_typewriter.Init()
+		output_typewriter.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	}
 }

@@ -1,4 +1,4 @@
-package output_ticker
+package output_typewriter
 
 import (
 	"fmt"
