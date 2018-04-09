@@ -46,14 +46,13 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	buffer.WriteString("\n")
 	buffer.WriteString("\n")
 	printNVA(weather.Today, &buffer)
-	buffer.WriteString("\n")
-	buffer.WriteString("\n")
-
+	
 	typewriter([]rune(buffer.String()), true)
 	fmt.Println()
 
 	var updateBuf bytes.Buffer
 	printLastUpdateInformation(t, weather, &updateBuf)
+	updateBuf.WriteString("\n")
 	updateBuf.WriteString(texts.Footer)
 	typewriter([]rune(updateBuf.String()), false)
 	fmt.Println()
@@ -120,7 +119,7 @@ func printNVA(weatherToday api.WeatherToday, buffer *bytes.Buffer) {
 }
 
 func nva(col2_text string, info api.WeatherInfos) string {
-	col2 := fmt.Sprintf("%-7s: %s° / %smm / %s%%", col2_text, fmt.Sprintf("%4.1f", info.Tt), fmt.Sprintf("%2d", info.Rr), fmt.Sprintf("%2d", info.Rrisk))
+	col2 := fmt.Sprintf("%-11s: %s° / %smm / %s%%", col2_text, fmt.Sprintf("%4.1f", info.Tt), fmt.Sprintf("%2d", info.Rr), fmt.Sprintf("%2d", info.Rrisk))
 	col3 := info.Syt
 	return fmt.Sprintf("%s <- %s", col2, col3)
 }
