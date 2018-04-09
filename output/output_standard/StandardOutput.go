@@ -95,6 +95,7 @@ func createBar() *uiprogress.Bar {
 func stopBar() {
 	if (progressbar) {
 		uiprogress.Stop()
+		fmt.Println(boxHorizontalLine())
 	}
 }
 
