@@ -1,5 +1,7 @@
 # aare.guru CLI
 
+<a href="https://aare.guru/"><img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/guru-logo-2018-3.png" alt="aare.guru" style="width: 50%" /></a>
+
 ## Aare.Guru?
 
 Wär isch de dä aare.guru? Lue hie: https://aare.guru
