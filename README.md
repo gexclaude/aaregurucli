@@ -1,6 +1,6 @@
 # aare.guru CLI
 
-<a href="https://aare.guru/"><img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/guru-logo-2018-3.png" alt="aare.guru" style="width: 50%" /></a>
+<a href="https://aare.guru/"><img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/guru-logo-2018-3.png" alt="aare.guru" width="25%" /></a>
 
 ## Aare.Guru?
 
