@@ -36,8 +36,6 @@ Obenuse, nid?
 
 <img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/aareguru-schribmaschine.gif" alt="aare.guru - schribmaschine" />
 
-<img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/aareguru-schribmaschine-green.gif" alt="aare.guru - schribmaschine grüen" />
-
 ## Grundsätzlechs
 
 Usfüüährig uf dr Kommandozile wie fougt:
