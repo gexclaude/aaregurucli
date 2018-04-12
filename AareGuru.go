@@ -14,7 +14,7 @@ import (
 
 var (
 	app           = kingpin.New("aareguru", texts.CLI_description)
-	standard      = app.Command("standard", texts.CLI_command_standard_description).Default()
+	standard      = app.Command("standard", texts.CLI_command_standard_description)
 	typewriter    = app.Command("schribmaschine", texts.CLI_command_typewriter_description)
 	proxy         = app.Flag("proxy", texts.CLI_proxy_description).Short('p').String()
 	colorless     = app.Flag("ohni-farb", texts.CLI_colorless_description).Short('f').Bool()
