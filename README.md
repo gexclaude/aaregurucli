@@ -30,7 +30,7 @@ Mit dere chasch ganz komod d Aare-Tämperatur, -Wassermängi u ds aktuelle bärn
 
 Obenuse, nid?
 
-## Liefere statt lafere
+## Lifere statt lafere
 
 <img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/aareguru-standard.gif" alt="aare.guru - schribmaschine" />
 
