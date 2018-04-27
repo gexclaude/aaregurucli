@@ -87,9 +87,9 @@ func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
 	buffer.WriteString("\n")
 	buffer.WriteString("---\n")
 	buffer.WriteString(
-		fmt.Sprintf("%-11s: %s %-4s <- %s",
+		fmt.Sprintf("%-11s: %s %-3s <- %s",
 			texts.Water_temperature_label,
-			fmt.Sprintf("%.1f", aare.Temperature),
+			fmt.Sprintf("%-4.1f", aare.Temperature),
 			texts.Degree_celsius_label,
 			aare.Temperature_text))
 
