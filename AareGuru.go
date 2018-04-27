@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"./api"
 	"./texts"
+	"./output/output_konjunktiv"
 	"./output/output_typewriter"
 	"./output/output_standard"
 	. "./console"
@@ -16,6 +17,7 @@ var (
 	app           = kingpin.New("aareguru", texts.CLI_description)
 	standard      = app.Command("standard", texts.CLI_command_standard_description).Default()
 	typewriter    = app.Command("schribmaschine", texts.CLI_command_typewriter_description)
+	konjunktiv    = app.Command("konjunktiv", texts.CLI_command_konjunktiv_description)
 	proxy         = app.Flag("proxy", texts.CLI_proxy_description).Short('p').String()
 	colorless     = app.Flag("ohni-farb", texts.CLI_colorless_description).Short('f').Bool()
 	noprogressbar = app.Flag("ohni-ladebauke", texts.CLI_noprogressbar_description).Short('l').Bool()
@@ -59,5 +61,8 @@ func main() {
 	case typewriter.FullCommand():
 		output_typewriter.Init()
 		output_typewriter.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+	case konjunktiv.FullCommand():
+		output_konjunktiv.Init()
+		output_konjunktiv.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	}
 }

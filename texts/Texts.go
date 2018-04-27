@@ -42,6 +42,7 @@ https://aare.guru`
 
 const CLI_command_standard_description = "Standardusgaab"
 const CLI_command_typewriter_description = "Schribmaschine style!"
+const CLI_command_konjunktiv_description = "wär im helvetische konjunktiv"
 
 
 const CLI_proxy_description = "Proxy URL - bspw. http://di-leidig-proxy:8080"
