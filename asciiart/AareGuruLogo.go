@@ -1,8 +1,7 @@
 package asciiart
 
-
-const Banner = 
-`|-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .|
+// Banner - the aare.guru logo for standard output
+const Banner = `|-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .-.   .|
 |  '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-'   '-' |
 |               _.   _.  ._   _       _        ._                        |
 |              (_|  (_|  |   (/_  o  (_|  |_|  |   |_|                   |

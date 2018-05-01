@@ -1,3 +1,4 @@
 package config
 
-const Endpoint_url = "http://aareguru.existenz.ch/currentV2.php?app=aare.guru.CLI"
+// EndpointURL The aare.guru HTTP Endpoint URL
+const EndpointURL = "http://aareguru.existenz.ch/currentV2.php?app=aare.guru.CLI"

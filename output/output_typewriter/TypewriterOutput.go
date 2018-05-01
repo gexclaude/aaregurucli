@@ -1,19 +1,21 @@
 package output_typewriter
 
 import (
-	"fmt"
-	"strconv"
-	"time"
 	"../../api"
 	"../../texts"
-	. "../output_common"
-	"sync"
+	"../output_common"
 	"bytes"
+	"fmt"
+	"strconv"
+	"sync"
+	"time"
 )
 
+// Init initializes the typewriter output
 func Init() {
 }
 
+// RenderAareGuruResponse renders an AareGuruResponse with the current output implementation style
 func RenderAareGuruResponse(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan string, wg *sync.WaitGroup) {
 	aareGuruResponse := readData(aareGuruResponseChannel, errChannel, wg)
 	printOutput(*aareGuruResponse)
@@ -46,7 +48,7 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	buffer.WriteString("\n")
 	buffer.WriteString("\n")
 	printNVA(weather.Today, &buffer)
-	
+
 	typewriter([]rune(buffer.String()), true)
 	fmt.Println()
 
@@ -72,54 +74,54 @@ func typewriter(converted []rune, specialCharSleep bool) {
 }
 
 func printLastUpdateInformation(t time.Time, weather api.Weather, buffer *bytes.Buffer) {
-	buffer.WriteString(fmt.Sprintf("%s | %02d:%02d - %02d.%02d.%04d (%s)\n", texts.Current_title, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location))
+	buffer.WriteString(fmt.Sprintf("%s | %02d:%02d - %02d.%02d.%04d (%s)\n", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location))
 }
 
 func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
-	glasses := LiterToGlasses(M3toLiter(aare.Flow))
-	glasses_text := strconv.Itoa(glasses)
-	if len(glasses_text) > 3 {
+	glasses := output_common.LiterToGlasses(output_common.M3toLiter(aare.Flow))
+	glassesText := strconv.Itoa(glasses)
+	if len(glassesText) > 3 {
 		// 123456 -> 123'456
-		glasses_text = glasses_text[:len(glasses_text)-3] + "'" + glasses_text[len(glasses_text)-3:]
+		glassesText = glassesText[:len(glassesText)-3] + "'" + glassesText[len(glassesText)-3:]
 	}
 
-	buffer.WriteString(texts.Water_label)
+	buffer.WriteString(texts.WaterLabel)
 	buffer.WriteString("\n")
 	buffer.WriteString("---\n")
 	buffer.WriteString(
 		fmt.Sprintf("%-11s: %s %-3s <- %s",
-			texts.Water_temperature_label,
+			texts.WaterTemperatureLabel,
 			fmt.Sprintf("%-4.1f", aare.Temperature),
-			texts.Degree_celsius_label,
-			aare.Temperature_text))
+			texts.DegreeCelsiusLabel,
+			aare.TemperatureText))
 
 	buffer.WriteString("\n")
 
 	buffer.WriteString(
 		fmt.Sprintf("%-11s: %s %s <- %s (%s %s)",
-			texts.Water_flow_label,
+			texts.WaterFlowLabel,
 			fmt.Sprintf("%3.0f", aare.Flow),
-			texts.Cubic_metre_per_second_label,
-			aare.Flow_text, glasses_text,
-			RandomFlowInGlassesText()))
+			texts.CubicMetrePerSecondLabel,
+			aare.FlowText, glassesText,
+			output_common.RandomFlowInGlassesText()))
 }
 
 func printNVA(weatherToday api.WeatherToday, buffer *bytes.Buffer) {
-	buffer.WriteString(texts.Weather_label)
+	buffer.WriteString(texts.WeatherLabel)
 	buffer.WriteString("\n")
 	buffer.WriteString("---\n")
-	buffer.WriteString(nva(texts.Nva_morning, weatherToday.V))
+	buffer.WriteString(nva(texts.NvaMorning, weatherToday.V))
 	buffer.WriteString("\n")
-	buffer.WriteString(nva(texts.Nva_afternoon, weatherToday.N))
+	buffer.WriteString(nva(texts.NvaAfternoon, weatherToday.N))
 	buffer.WriteString("\n")
-	buffer.WriteString(nva(texts.Nva_evening, weatherToday.A))
+	buffer.WriteString(nva(texts.NvaEvening, weatherToday.A))
 	buffer.WriteString("\n")
 	buffer.WriteString("\n")
-	buffer.WriteString(texts.Nva_caption)
+	buffer.WriteString(texts.NvaCaption)
 }
 
-func nva(col2_text string, info api.WeatherInfos) string {
-	col2 := fmt.Sprintf("%-11s: %s° / %smm / %s%%", col2_text, fmt.Sprintf("%4.1f", info.Tt), fmt.Sprintf("%2d", info.Rr), fmt.Sprintf("%2d", info.Rrisk))
+func nva(col2Text string, info api.WeatherInfos) string {
+	col2 := fmt.Sprintf("%-11s: %s° / %smm / %s%%", col2Text, fmt.Sprintf("%4.1f", info.Tt), fmt.Sprintf("%2d", info.Rr), fmt.Sprintf("%2d", info.Rrisk))
 	col3 := info.Syt
 	return fmt.Sprintf("%s <- %s", col2, col3)
 }

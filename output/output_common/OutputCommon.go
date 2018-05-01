@@ -1,28 +1,30 @@
 package output_common
 
 import (
-	"time"
-	"math/rand"
 	"../../texts"
+	"math/rand"
+	"time"
 )
 
+// M3toLiter converts cubic meter to liter
 func M3toLiter(m3 float32) float32 {
 	return m3 * (10 * 10 * 10)
 }
 
+// LiterToGlasses calculates nr of glasses of 3dl for a given liter count
 func LiterToGlasses(liter float32) int {
 	return int(liter / 0.3) // 3 dl
 }
 
+// RandomFlowInGlassesText either returns glasses of beer per second or glasses of siroop per second. decision is random
 func RandomFlowInGlassesText() string {
-	if (rand_bool()) {
-		return texts.Flow_beer_label
-	} else {
-		return texts.Flow_siroop_label
+	if randomBool() {
+		return texts.FlowBeerLabel
 	}
+	return texts.FlowSiroopLabel
 }
 
-func rand_bool() bool {
+func randomBool() bool {
 	rand.Seed(time.Now().UnixNano())
 	return rand.Float32() < 0.5
 }

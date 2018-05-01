@@ -1,16 +1,16 @@
 package output_standard
 
 import (
-	"fmt"
-	"strconv"
-	"time"
-	"../../asciiart"
 	"../../api"
+	"../../asciiart"
+	"../../console"
 	"../../texts"
-	. "../../console"
-	. "../output_common"
+	"../output_common"
+	"fmt"
 	"github.com/gosuri/uiprogress"
+	"strconv"
 	"sync"
+	"time"
 )
 
 const progressBarCount = 100
@@ -18,14 +18,16 @@ const progressBarCount = 100
 var bar *uiprogress.Bar
 var progressbar = true
 
+// Init initializes the typewriter output
 func Init(withProgressBar bool) {
 	progressbar = withProgressBar
 	bar = createBar()
 }
 
+// RenderAareGuruResponse renders an AareGuruResponse with the current output implementation style
 func RenderAareGuruResponse(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan string, wg *sync.WaitGroup) {
 	fmt.Println(boxHorizontalLine())
-	fmt.Print(CBlue(asciiart.Banner))
+	fmt.Print(console.CBlue(asciiart.Banner))
 	fmt.Println(boxHorizontalLine())
 
 	defer func() {
@@ -70,18 +72,18 @@ func readData(aareGuruResponseChannel chan api.AareGuruResponse, errChannel chan
 }
 
 func createBar() *uiprogress.Bar {
-	if (!progressbar) {
-		return nil;
+	if !progressbar {
+		return nil
 	}
 
 	bar := uiprogress.AddBar(progressBarCount).AppendCompleted().PrependElapsed()
 	bar.Width = 45
 	bar.PrependFunc(func(b *uiprogress.Bar) string {
-		msg := texts.Loading_msg
+		msg := texts.LoadingMsg
 		len := 9
 		if b.Current() == progressBarCount {
-			msg = CGreen(texts.Success_msg)
-			len += colorCharsLength(CGreen(""))
+			msg = console.CGreen(texts.SuccessMsg)
+			len += colorCharsLength(console.CGreen(""))
 		}
 		return fmt.Sprintf("| %-"+strconv.Itoa(len)+"s %3d", msg, b.Current())
 	})
@@ -93,14 +95,14 @@ func createBar() *uiprogress.Bar {
 }
 
 func stopBar() {
-	if (progressbar) {
+	if progressbar {
 		uiprogress.Stop()
 		fmt.Println(boxHorizontalLine())
 	}
 }
 
 func increaseBar(bar *uiprogress.Bar, i int) {
-	if (progressbar) {
+	if progressbar {
 		bar.Incr()
 		if i < progressBarCount*0.5 {
 			time.Sleep(time.Millisecond * 2)
@@ -122,57 +124,57 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	printAareTemperatureAndFlow(aare)
 	printNVA(weather.Today)
 	fmt.Println()
-	fmt.Println(CBgBlue(CGray(fmt.Sprintf(" %s ", texts.Footer))))
+	fmt.Println(console.CBgBlue(console.CGray(fmt.Sprintf(" %s ", texts.Footer))))
 	fmt.Println()
 }
 
 func printLastUpdateInformation(t time.Time, weather api.Weather) {
-	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d (%s)", texts.Current_title, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location)))
+	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d (%s)", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location)))
 	fmt.Println(boxHorizontalLine())
 }
 
 func printAareTemperatureAndFlow(aare api.Aare) {
-	glasses := LiterToGlasses(M3toLiter(aare.Flow))
-	glasses_text := strconv.Itoa(glasses)
-	if len(glasses_text) > 3 {
+	glasses := output_common.LiterToGlasses(output_common.M3toLiter(aare.Flow))
+	glassesText := strconv.Itoa(glasses)
+	if len(glassesText) > 3 {
 		// 123456 -> 123'456
-		glasses_text = glasses_text[:len(glasses_text)-3] + "'" + glasses_text[len(glasses_text)-3:]
+		glassesText = glassesText[:len(glassesText)-3] + "'" + glassesText[len(glassesText)-3:]
 	}
 
 	fmt.Println(box(
 		fmt.Sprintf("%-13s | %s %-4s - %s",
-			texts.Water_label,
-			CBlue(fmt.Sprintf("%5.1f", aare.Temperature)),
-			texts.Degree_celsius_label,
-			aare.Temperature_text),
-		CBlue("")))
+			texts.WaterLabel,
+			console.CBlue(fmt.Sprintf("%5.1f", aare.Temperature)),
+			texts.DegreeCelsiusLabel,
+			aare.TemperatureText),
+		console.CBlue("")))
 
 	fmt.Println(box(
 		fmt.Sprintf("%-13s | %s %4s - %s (%s %s)",
-			texts.Water_flow_label,
-			CBlue(fmt.Sprintf("%5.0f", aare.Flow)),
-			texts.Cubic_metre_per_second_label,
-			aare.Flow_text, glasses_text,
-			RandomFlowInGlassesText()),
-		CBlue("")))
+			texts.WaterFlowLabel,
+			console.CBlue(fmt.Sprintf("%5.0f", aare.Flow)),
+			texts.CubicMetrePerSecondLabel,
+			aare.FlowText, glassesText,
+			output_common.RandomFlowInGlassesText()),
+		console.CBlue("")))
 }
 
 func printNVA(weatherToday api.WeatherToday) {
 	fmt.Println(boxHorizontalLine())
-	fmt.Println(nva_row(texts.Nva_title_1st_row, texts.Nva_morning, weatherToday.V))
-	fmt.Println(nva_row(texts.Nva_title_2nd_row, texts.Nva_afternoon, weatherToday.N))
-	fmt.Println(nva_row("", texts.Nva_evening, weatherToday.A))
+	fmt.Println(nvaRow(texts.NvaTitle1stRow, texts.NvaMorning, weatherToday.V))
+	fmt.Println(nvaRow(texts.NvaTitle2ndRow, texts.NvaAfternoon, weatherToday.N))
+	fmt.Println(nvaRow("", texts.NvaEvening, weatherToday.A))
 	fmt.Println(boxHorizontalLine())
-	fmt.Println(box(texts.Nva_caption))
+	fmt.Println(box(texts.NvaCaption))
 	fmt.Println(boxHorizontalLine())
 }
 
-func nva_row(col1_text string, col2_text string, info api.WeatherInfos) string {
+func nvaRow(col1Text string, col2Text string, info api.WeatherInfos) string {
 
-	col1 := col1_text
-	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2_text, CRed(fmt.Sprintf("%4.1f", info.Tt)), CGreen(fmt.Sprintf("%2d", info.Rr)), CBrown(fmt.Sprintf("%2d", info.Rrisk)))
+	col1 := col1Text
+	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2Text, console.CRed(fmt.Sprintf("%4.1f", info.Tt)), console.CGreen(fmt.Sprintf("%2d", info.Rr)), console.CBrown(fmt.Sprintf("%2d", info.Rrisk)))
 	col3 := info.Syt
-	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), CRed(""), CGreen(""), CBrown(""))
+	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), console.CRed(""), console.CGreen(""), console.CBrown(""))
 }
 
 func boxHorizontalLine() string {
