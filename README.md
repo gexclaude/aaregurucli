@@ -53,7 +53,7 @@ Spicke duesch grundsätzläch so:
     brew tap gexclaude/homebrew-tap
     brew install aareguru
 
-Aktualisierige duesch so
+Aktualisiere duesch so
 
     brew upgrade aareguru
 
