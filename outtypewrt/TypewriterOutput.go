@@ -1,9 +1,9 @@
-package output_typewriter
+package outtypewrt
 
 import (
-	"../../api"
-	"../../texts"
-	"../output_common"
+	"../api"
+	"../outcmn"
+	"../texts"
 	"bytes"
 	"fmt"
 	"strconv"
@@ -78,7 +78,7 @@ func printLastUpdateInformation(t time.Time, weather api.Weather, buffer *bytes.
 }
 
 func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
-	glasses := output_common.LiterToGlasses(output_common.M3toLiter(aare.Flow))
+	glasses := outcmn.LiterToGlasses(outcmn.M3toLiter(aare.Flow))
 	glassesText := strconv.Itoa(glasses)
 	if len(glassesText) > 3 {
 		// 123456 -> 123'456
@@ -103,7 +103,7 @@ func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
 			fmt.Sprintf("%3.0f", aare.Flow),
 			texts.CubicMetrePerSecondLabel,
 			aare.FlowText, glassesText,
-			output_common.RandomFlowInGlassesText()))
+			outcmn.RandomFlowInGlassesText()))
 }
 
 func printNVA(weatherToday api.WeatherToday, buffer *bytes.Buffer) {

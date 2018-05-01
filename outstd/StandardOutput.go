@@ -1,11 +1,11 @@
-package output_standard
+package outstd
 
 import (
-	"../../api"
-	"../../asciiart"
-	"../../console"
-	"../../texts"
-	"../output_common"
+	"../api"
+	"../asciiart"
+	"../console"
+	"../outcmn"
+	"../texts"
 	"fmt"
 	"github.com/gosuri/uiprogress"
 	"strconv"
@@ -134,7 +134,7 @@ func printLastUpdateInformation(t time.Time, weather api.Weather) {
 }
 
 func printAareTemperatureAndFlow(aare api.Aare) {
-	glasses := output_common.LiterToGlasses(output_common.M3toLiter(aare.Flow))
+	glasses := outcmn.LiterToGlasses(outcmn.M3toLiter(aare.Flow))
 	glassesText := strconv.Itoa(glasses)
 	if len(glassesText) > 3 {
 		// 123456 -> 123'456
@@ -155,7 +155,7 @@ func printAareTemperatureAndFlow(aare api.Aare) {
 			console.CBlue(fmt.Sprintf("%5.0f", aare.Flow)),
 			texts.CubicMetrePerSecondLabel,
 			aare.FlowText, glassesText,
-			output_common.RandomFlowInGlassesText()),
+			outcmn.RandomFlowInGlassesText()),
 		console.CBlue("")))
 }
 

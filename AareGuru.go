@@ -3,8 +3,8 @@ package main
 import (
 	"./api"
 	"./console"
-	"./output/output_standard"
-	"./output/output_typewriter"
+	"./outstd"
+	"./outtypewrt"
 	"./texts"
 	"fmt"
 	"gopkg.in/alecthomas/kingpin.v2"
@@ -54,10 +54,10 @@ func main() {
 
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 	case standard.FullCommand():
-		output_standard.Init(!*noprogressbar)
-		output_standard.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		outstd.Init(!*noprogressbar)
+		outstd.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	case typewriter.FullCommand():
-		output_typewriter.Init()
-		output_typewriter.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		outtypewrt.Init()
+		outtypewrt.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	}
 }

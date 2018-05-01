@@ -1,7 +1,7 @@
-package output_common
+package outcmn
 
 import (
-	"../../texts"
+	"../texts"
 	"math/rand"
 	"time"
 )

@@ -18,11 +18,11 @@ type AareGuruResponse struct {
 
 // Aare contains all values related to the aare and is contained in the AareGuruResponse
 type Aare struct {
-	Timestamp        int64
-	Timestring       string
-	Temperature      float32
+	Timestamp       int64
+	Timestring      string
+	Temperature     float32
 	TemperatureText string `json:"temperature_text,omitempty"`
-	Flow             float32
+	Flow            float32
 	FlowText        string `json:"flow_text,omitempty"`
 }
 
