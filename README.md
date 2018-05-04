@@ -76,6 +76,14 @@ Suechdr die richtig Plattform us kopier dr Link zur Deb-Datei vodr Release Site 
     wget https://github.com/gexclaude/aaregurucli/releases/download/v<...>/aareguru_<...>.deb -0 aareguru.deb
     sudo dpkg -i aareguru.deb
 
+### Arch: D Hobu's säuber lah häre klepfä
+
+Suechdr die richtig Plattform us u clones vom AUR-Repo [AUR](https://aur.archlinux.org/packages/aareguru-cli)
+
+    git clone https://aur.archlinux.org/aareguru-cli.git
+    cd aareguru-cli
+    makepkg -si
+
 ### Windows
 
 Kei Grund Befählszyle nid ds bruuche!
