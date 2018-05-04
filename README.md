@@ -12,6 +12,7 @@
    * [Linux](#linux)
       * [RPM: D RPM Datei häre chnüble](#rpm-d-rpm-datei-h%C3%A4re-chn%C3%BCble)
       * [Debian: D Deb Datei mit blose Chlööpe häre tue](#debian-d-deb-datei-mit-blose-chl%C3%B6%C3%B6pe-h%C3%A4re-tue)
+      * [Arch: D Hobu's säuber la häre chlepfä](#arch-d-hobus-s%C3%A4uber-la-h%C3%A4re-chlepf%C3%A4)
    * [Windows](#windows)
       * [Windows: Mit scoop aareguru ufläse](#windows-mit-scoop-aareguru-ufl%C3%A4se)
       * [Windows: ds Päckli vo Häntsche abelade](#windows-ds-p%C3%A4ckli-vo-h%C3%A4ntsche-abelade)
@@ -76,7 +77,7 @@ Suechdr die richtig Plattform us kopier dr Link zur Deb-Datei vodr Release Site 
     wget https://github.com/gexclaude/aaregurucli/releases/download/v<...>/aareguru_<...>.deb -0 aareguru.deb
     sudo dpkg -i aareguru.deb
 
-### Arch: D Hobu's säuber lah häre klepfä
+### Arch: D Hobu's säuber la häre chlepfä
 
 Suechdr die richtig Plattform us u clones vom AUR-Repo [AUR](https://aur.archlinux.org/packages/aareguru-cli)
 
