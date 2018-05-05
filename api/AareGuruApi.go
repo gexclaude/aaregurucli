@@ -78,7 +78,7 @@ func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse,
 
 		if debug {
 			fmt.Printf("Raw: %s\n", string(data))
-			fmt.Printf("Response: %s\n", aareGuruResponse)
+			fmt.Printf("Response: %#v\n", aareGuruResponse)
 		}
 	}
 
