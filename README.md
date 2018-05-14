@@ -124,7 +124,7 @@ Wede e proxy bruchsch
 
 ### Bash
 
-Fougende Befähl spuckt s autcomplete script für Bash use:
+Fougende Befähl spöit s autcomplete script für Bash use:
 
     aareguru --completion-script-bash
 
@@ -139,7 +139,7 @@ oder fix hingerlege, de muesches aber säuber aktuell haute
 
 ### Zsh
 
-Fougende Befähl spuckt s autcomplete script für Zsh use:
+Fougende Befähl spöit s autcomplete script für Zsh use:
 
     aareguru --completion-script-zsh
 
