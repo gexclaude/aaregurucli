@@ -84,7 +84,7 @@ const CliCommandStandardDescription = "Standardusgaab"
 const CliCommandTypewriterDescription = "Schribmaschine style!"
 
 // CliCommandKonjunktivDescription used as a label for console output
-const CLI_command_konjunktiv_description = "wär im helvetische konjunktiv"
+const CliCommandKonjunktivDescription = "wär im helvetische konjunktiv"
 
 
 // CliProxyDescription used as a label for console output

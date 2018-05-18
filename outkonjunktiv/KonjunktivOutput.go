@@ -1,12 +1,13 @@
-package output_konjunktiv
+package outkonjunktiv
 
 import (
 	"fmt"
+	"regexp"
 	// "strconv"
 	// "time"
-	"../../api"
+	"../api"
 	// "../../texts"
-	. "../../console"
+	. "../console"
 	// . "../output_common"
 	"sync"
 )
@@ -38,5 +39,17 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	aare := aareGuruResponse.Aare
 
 	fmt.Println("D Aaare wär", CGreen(fmt.Sprint(aare.Temperature)), "Grad warm.")
-	fmt.Println("I würd säge", CGreen(fmt.Sprint(aare.Temperature_text)))
+	fmt.Println("I würd säge", CGreen(fmt.Sprint(konjunktify(aare.TemperatureText))))
+	fmt.Println(CGreen(fmt.Sprint(konjunktify("Isch das wahr?"))))
 }
+
+func konjunktify(text string) string {
+	
+	for _, s := range getSubstitutions() {
+    // only match entire words, cannot go case insensitiv as some words would match nouns.
+		re := regexp.MustCompile("\\b" + s.original + "\\b")
+		text = re.ReplaceAllString(text, s.replacement)
+	}
+
+	return text
+} 

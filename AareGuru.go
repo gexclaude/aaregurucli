@@ -5,8 +5,8 @@ import (
 	"./console"
 	"./outstd"
 	"./outtypewrt"
+	"./outkonjunktiv"
 	"./texts"
-	"./output/output_konjunktiv"
 	"fmt"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
@@ -17,7 +17,7 @@ var (
 	app           = kingpin.New("aareguru", texts.CliDescription)
 	standard      = app.Command("standard", texts.CliCommandStandardDescription).Default()
 	typewriter    = app.Command("schribmaschine", texts.CliCommandTypewriterDescription)
-	konjunktiv    = app.Command("konjunktiv", texts.CLI_command_konjunktiv_description)
+	konjunktiv    = app.Command("konjunktiv", texts.CliCommandKonjunktivDescription)
 	proxy         = app.Flag("proxy", texts.CliProxyDescription).Short('p').String()
 	colorless     = app.Flag("ohni-farb", texts.CliColorlessDescription).Short('f').Bool()
 	noprogressbar = app.Flag("ohni-ladebauke", texts.CliNoprogressbarDescription).Short('l').Bool()
@@ -62,7 +62,7 @@ func main() {
 		outtypewrt.Init()
 		outtypewrt.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	case konjunktiv.FullCommand():
-		outtypewrt.Init()
-		outtypewrt.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		outkonjunktiv.Init()
+		outkonjunktiv.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	}
 }
