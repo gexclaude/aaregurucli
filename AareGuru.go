@@ -1,34 +1,34 @@
 package main
 
 import (
-	"fmt"
 	"./api"
+	"./console"
+	"./outstd"
+	"./outtypewrt"
 	"./texts"
 	"./output/output_konjunktiv"
-	"./output/output_typewriter"
-	"./output/output_standard"
-	. "./console"
+	"fmt"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 	"sync"
 )
 
 var (
-	app           = kingpin.New("aareguru", texts.CLI_description)
-	standard      = app.Command("standard", texts.CLI_command_standard_description).Default()
-	typewriter    = app.Command("schribmaschine", texts.CLI_command_typewriter_description)
+	app           = kingpin.New("aareguru", texts.CliDescription)
+	standard      = app.Command("standard", texts.CliCommandStandardDescription).Default()
+	typewriter    = app.Command("schribmaschine", texts.CliCommandTypewriterDescription)
 	konjunktiv    = app.Command("konjunktiv", texts.CLI_command_konjunktiv_description)
-	proxy         = app.Flag("proxy", texts.CLI_proxy_description).Short('p').String()
-	colorless     = app.Flag("ohni-farb", texts.CLI_colorless_description).Short('f').Bool()
-	noprogressbar = app.Flag("ohni-ladebauke", texts.CLI_noprogressbar_description).Short('l').Bool()
-	debug         = app.Flag("debug", texts.CLI_proxy_description).Short('d').Hidden().Bool()
+	proxy         = app.Flag("proxy", texts.CliProxyDescription).Short('p').String()
+	colorless     = app.Flag("ohni-farb", texts.CliColorlessDescription).Short('f').Bool()
+	noprogressbar = app.Flag("ohni-ladebauke", texts.CliNoprogressbarDescription).Short('l').Bool()
+	debug         = app.Flag("debug", texts.CliProxyDescription).Short('d').Hidden().Bool()
 )
 
 func main() {
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
-	InitConsole(!*colorless)
-	ClearConsole()
+	console.InitConsole(!*colorless)
+	console.ClearConsole()
 	fmt.Println()
 
 	aareGuruResponseChannel := make(chan api.AareGuruResponse)
@@ -39,13 +39,13 @@ func main() {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println()
-			fmt.Println(CRed(texts.Error_Detail_msg))
+			fmt.Println(console.CRed(texts.ErrorDetailMsg))
 			fmt.Println(r)
 			fmt.Println()
-			fmt.Print(texts.Error_Hints_msg)
+			fmt.Print(texts.ErrorHintsMsg)
 			fmt.Print()
 		}
-		BeforeExitConsole()
+		console.BeforeExitConsole()
 	}()
 
 	go func() {
@@ -56,13 +56,13 @@ func main() {
 
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 	case standard.FullCommand():
-		output_standard.Init(! *noprogressbar)
-		output_standard.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		outstd.Init(!*noprogressbar)
+		outstd.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	case typewriter.FullCommand():
-		output_typewriter.Init()
-		output_typewriter.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		outtypewrt.Init()
+		outtypewrt.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	case konjunktiv.FullCommand():
-		output_konjunktiv.Init()
-		output_konjunktiv.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
+		outtypewrt.Init()
+		outtypewrt.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
 	}
 }

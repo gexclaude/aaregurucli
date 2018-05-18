@@ -2,6 +2,8 @@
 
 <a href="https://aare.guru/"><img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/guru-logo-2018-3.png" alt="aare.guru" width="25%" /></a>
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/gexclaude/aaregurucli)](https://goreportcard.com/report/github.com/gexclaude/aaregurucli)
+
 * [Was chani mit dr aare.guru CLI äpp?](#was-chani-mit-dr-aareguru-cli-%C3%A4pp)
 * [Lifere statt lafere](#lifere-statt-lafere)
 * [Grundsätzlechs](#grunds%C3%A4tzlechs)
@@ -53,7 +55,7 @@ Spicke duesch grundsätzläch so:
     brew tap gexclaude/homebrew-tap
     brew install aareguru
 
-Aktualisierige duesch so
+Aktualisiere duesch so
 
     brew upgrade aareguru
 
@@ -122,7 +124,7 @@ Wede e proxy bruchsch
 
 ### Bash
 
-Fougende Befähl spuckt s autcomplete script für Bash use:
+Fougende Befähl spöit s autcomplete script für Bash use:
 
     aareguru --completion-script-bash
 
@@ -137,7 +139,7 @@ oder fix hingerlege, de muesches aber säuber aktuell haute
 
 ### Zsh
 
-Fougende Befähl spuckt s autcomplete script für Zsh use:
+Fougende Befähl spöit s autcomplete script für Zsh use:
 
     aareguru --completion-script-zsh
 

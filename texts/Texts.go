@@ -1,50 +1,97 @@
 package texts
 
-const Current_title = "Latest Öpdate"
-const Forecast2h_title = "I öpe 2h"
+// CurrentTitle used as a label for console output
+const CurrentTitle = "Latest Öpdate"
 
-const Degree_celsius_label = "C°"
-const Cubic_metre_per_second_label = "m3/s"
+// Forecast2hTitle used as a label for console output
+const Forecast2hTitle = "I öpe 2h"
 
-const Flow_beer_label = "Stange Bier/Sec."
-const Flow_siroop_label = "Sirupgleser/Sec"
-const Water_label = "Wasser"
-const Weather_label = "Wätter"
-const Water_temperature_label = "Temperatur"
-const Water_flow_label = "Mängi"
+// DegreeCelsiusLabel used as a label for console output
+const DegreeCelsiusLabel = "C°"
 
-const Nva_title_1st_row = "Ds wätter"
-const Nva_title_2nd_row = "hüt düre Tag"
+// CubicMetrePerSecondLabel used as a label for console output
+const CubicMetrePerSecondLabel = "m3/s"
 
-const Nva_morning = "Morge"
-const Nva_afternoon = "Nami"
-const Nva_evening = "Abe"
-const Nva_caption = "X° = Temp. / Ymm = Rägemängi / Z% = Rägewahrschindlechkeit"
+// FlowBeerLabel used as a label for console output
+const FlowBeerLabel = "Stange Bier/Sec."
 
+// FlowSiroopLabel used as a label for console output
+const FlowSiroopLabel = "Sirupgleser/Sec"
+
+// WaterLabel used as a label for console output
+const WaterLabel = "Wasser"
+
+// WeatherLabel used as a label for console output
+const WeatherLabel = "Wätter"
+
+// WaterTemperatureLabel used as a label for console output
+const WaterTemperatureLabel = "Temperatur"
+
+// WaterFlowLabel used as a label for console output
+const WaterFlowLabel = "Mängi"
+
+// NvaTitle1stRow used as a label for console output
+const NvaTitle1stRow = "Ds wätter"
+
+// NvaTitle2ndRow used as a label for console output
+const NvaTitle2ndRow = "hüt düre Tag"
+
+// NvaMorning used as a label for console output
+const NvaMorning = "Morge"
+
+// NvaAfternoon used as a label for console output
+const NvaAfternoon = "Nami"
+
+// NvaEvening used as a label for console output
+const NvaEvening = "Abe"
+
+// NvaCaption used as a label for console output
+const NvaCaption = "X° = Temp. / Ymm = Rägemängi / Z% = Rägewahrschindlechkeit"
+
+// Footer used as a label for console output
 const Footer = "https://aare.guru"
 
-const Loading_msg = "Louding"
-const Success_msg = "Söögsess!"
+// LoadingMsg used as a label for console output
+const LoadingMsg = "Louding"
 
-const Error_msg = "Dr aare.guru isch verärgeret. Är git üs kei antwort meh."
-const Error_Detail_msg = "Nachfolgends isch dr detailliert Fehler: "
-const Error_Hints_msg = `* Bisch auefaus hingeremne proxy? Probiere mau dr Proxy mit --proxy http://di-leidig-proxy:8080 adsgä
+// SuccessMsg used as a label for console output
+const SuccessMsg = "Söögsess!"
+
+// ErrorMsg used as a label for console output
+const ErrorMsg = "Dr aare.guru isch verärgeret. Är git üs kei antwort meh."
+
+// ErrorDetailMsg used as a label for console output
+const ErrorDetailMsg = "Nachfolgends isch dr detailliert Fehler: "
+
+// ErrorHintsMsg used as a label for console output
+const ErrorHintsMsg = `* Bisch auefaus hingeremne proxy? Probiere mau dr Proxy mit --proxy http://di-leidig-proxy:8080 adsgä
 * Oder hesch no e auti Version? Due mau aktualisiere
 `
 
 // CLI help
 
-const CLI_description = `Mit däm aare guru CLI Wärchzüg chasch ganz komod d Aare-Tämperatur, -Wassermängi u ds aktuelle bärner Wätter i dire Befählszyle abfragä - u das i gwaneter aare.guru Qualität.
+// CliDescription used as a label for console output
+const CliDescription = `Mit däm aare guru CLI Wärchzüg chasch ganz komod d Aare-Tämperatur, -Wassermängi u ds aktuelle bärner Wätter i dire Befählszyle abfragä - u das i gwaneter aare.guru Qualität.
 
 Obenuse, nid?
 
 https://aare.guru`
 
-const CLI_command_standard_description = "Standardusgaab"
-const CLI_command_typewriter_description = "Schribmaschine style!"
+// CliCommandStandardDescription used as a label for console output
+const CliCommandStandardDescription = "Standardusgaab"
+
+// CliCommandTypewriterDescription used as a label for console output
+const CliCommandTypewriterDescription = "Schribmaschine style!"
+
+// CliCommandKonjunktivDescription used as a label for console output
 const CLI_command_konjunktiv_description = "wär im helvetische konjunktiv"
 
 
-const CLI_proxy_description = "Proxy URL - bspw. http://di-leidig-proxy:8080"
-const CLI_colorless_description = "Faarbloosi Usgaab"
-const CLI_noprogressbar_description = "Ladebauke wägla"
+// CliProxyDescription used as a label for console output
+const CliProxyDescription = "Proxy URL - bspw. http://di-leidig-proxy:8080"
+
+// CliColorlessDescription used as a label for console output
+const CliColorlessDescription = "Faarbloosi Usgaab"
+
+// CliNoprogressbarDescription used as a label for console output
+const CliNoprogressbarDescription = "Ladebauke wägla"

@@ -1,41 +1,46 @@
 package api
 
 import (
-	"net/http"
-	"io/ioutil"
-	"encoding/json"
 	"../config"
-	"net/url"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
+// AareGuruResponse root type of the aare.guru response
 type AareGuruResponse struct {
 	Status  string
 	Aare    Aare
 	Weather Weather
 }
 
+// Aare contains all values related to the aare and is contained in the AareGuruResponse
 type Aare struct {
-	Timestamp        int64
-	Timestring       string
-	Temperature      float32
-	Temperature_text string
-	Flow             float32
-	Flow_text        string
+	Timestamp       int64
+	Timestring      string
+	Temperature     float32
+	TemperatureText string `json:"temperature_text,omitempty"`
+	Flow            float32
+	FlowText        string `json:"flow_text,omitempty"`
 }
 
+// Weather holds weather related information from the AareGuruResponse
 type Weather struct {
 	Current  WeatherInfos
 	Today    WeatherToday
 	Location string
 }
 
+// WeatherToday represent today's weather split up into morning, afternoon and evening
 type WeatherToday struct {
 	V WeatherInfos
 	N WeatherInfos
 	A WeatherInfos
 }
 
+// WeatherInfos represents a weather snapshot
 type WeatherInfos struct {
 	Sy    string
 	Syt   string
@@ -45,6 +50,7 @@ type WeatherInfos struct {
 	Rrisk int16
 }
 
+// AskAareGuru ask aare.guru for an answer, returns an AareGuruResponse
 func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse, errChannel chan<- string, debug bool) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -54,40 +60,40 @@ func AskAareGuru(proxy *string, aareGuruResponseChannel chan<- AareGuruResponse,
 
 	var aareGuruResponse AareGuruResponse
 
-	client := createHttpClient(proxy)
+	client := createHTTPClient(proxy)
 
-	response, err := client.Get(config.Endpoint_url)
-	if err != nil { 
+	response, err := client.Get(config.EndpointURL)
+	if err != nil {
 		panic(err)
 	} else {
-		if (debug) {
+		if debug {
 			fmt.Printf("Status: %s\n", response.Status)
 		}
 		data, err := ioutil.ReadAll(response.Body)
-		if (err != nil) {
+		if err != nil {
 			panic(err)
 		}
 
 		json.Unmarshal(data, &aareGuruResponse)
 
-		if (debug) {
+		if debug {
 			fmt.Printf("Raw: %s\n", string(data))
-			fmt.Printf("Response: %s\n", aareGuruResponse)
+			fmt.Printf("Response: %#v\n", aareGuruResponse)
 		}
 	}
 
 	aareGuruResponseChannel <- aareGuruResponse
 }
-func createHttpClient(proxy *string) *http.Client {
-	var myHttpClient *http.Client
+func createHTTPClient(proxy *string) *http.Client {
+	var myHTTPClient *http.Client
 	if *proxy == "" {
-		myHttpClient = &http.Client{}
+		myHTTPClient = &http.Client{}
 	} else {
-		proxyUrl, err := url.Parse(*proxy)
+		proxyURL, err := url.Parse(*proxy)
 		if err != nil {
 			panic(err)
 		}
-		myHttpClient = &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyUrl)}}
+		myHTTPClient = &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyURL)}}
 	}
-	return myHttpClient
+	return myHTTPClient
 }
