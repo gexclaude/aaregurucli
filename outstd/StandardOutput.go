@@ -119,8 +119,7 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	weather := aareGuruResponse.Weather
 
 	t := time.Unix(aare.Timestamp, 0)
-
-	printLastUpdateInformation(t, weather)
+	printCityAndLastUpdate(t, aare)
 	printAareTemperatureAndFlow(aare)
 	printNVA(weather.Today)
 	fmt.Println()
@@ -128,8 +127,13 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	fmt.Println()
 }
 
-func printLastUpdateInformation(t time.Time, weather api.Weather) {
-	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d (%s)", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location)))
+func printCityAndLastUpdate(t time.Time, aare api.Aare) {
+    if aare.Location != aare.LocationLong {
+	    fmt.Println(box(fmt.Sprintf("%-13s | %s (%s)", texts.CityTitle, aare.Location, aare.LocationLong)))
+	} else {
+	    fmt.Println(box(fmt.Sprintf("%-13s | %s", texts.CityTitle, aare.Location)))
+	}
+	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year())))
 	fmt.Println(boxHorizontalLine())
 }
 
@@ -172,7 +176,7 @@ func printNVA(weatherToday api.WeatherToday) {
 func nvaRow(col1Text string, col2Text string, info api.WeatherInfos) string {
 
 	col1 := col1Text
-	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2Text, console.CRed(fmt.Sprintf("%4.1f", info.Tt)), console.CGreen(fmt.Sprintf("%2d", info.Rr)), console.CBrown(fmt.Sprintf("%2d", info.Rrisk)))
+	col2 := fmt.Sprintf("%-6s: %s° / %smm / %s%%", col2Text, console.CRed(fmt.Sprintf("%4.1f", info.Tt)), console.CGreen(fmt.Sprintf("%2.0f", info.Rr)), console.CBrown(fmt.Sprintf("%2d", info.Rrisk)))
 	col3 := info.Syt
 	return box(fmt.Sprintf("%-13s | %s | %s", col1, col2, col3), console.CRed(""), console.CGreen(""), console.CBrown(""))
 }

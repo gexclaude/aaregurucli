@@ -1,5 +1,11 @@
 package texts
 
+// LocationAndTimeTitle used as a label for console output
+const LocationAndTimeTitle = "Ort u Zyt"
+
+// CityTitle used as a label for console output
+const CityTitle = "City"
+
 // CurrentTitle used as a label for console output
 const CurrentTitle = "Latest Öpdate"
 
@@ -82,6 +88,12 @@ const CliCommandStandardDescription = "Standardusgaab"
 
 // CliCommandTypewriterDescription used as a label for console output
 const CliCommandTypewriterDescription = "Schribmaschine style!"
+
+// CliCommandCitiesDescription used as a label for console output
+const CliCommandCitiesDescription = "D Städt ufliste"
+
+// CliCityDescription used as a label for console output
+const CliCityDescription = "D Stadt"
 
 // CliProxyDescription used as a label for console output
 const CliProxyDescription = "Proxy URL - bspw. http://di-leidig-proxy:8080"
