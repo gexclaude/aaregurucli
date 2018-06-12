@@ -2,4 +2,4 @@
 
 gofmt -w .
 
-find . -type d | xargs -L 1 golint
+find . -type d | xargs -L 1 ~/go/bin/golint

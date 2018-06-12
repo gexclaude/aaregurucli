@@ -44,6 +44,11 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 
 	var buffer bytes.Buffer
 
+	buffer.WriteString(texts.LocationAndTimeTitle)
+	buffer.WriteString("\n")
+	buffer.WriteString("---\n")
+	printCityLastUpdateInformation(t, aare, &buffer)
+
 	printAareTemperatureAndFlow(aare, &buffer)
 	buffer.WriteString("\n")
 	buffer.WriteString("\n")
@@ -53,7 +58,6 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	fmt.Println()
 
 	var updateBuf bytes.Buffer
-	printLastUpdateInformation(t, weather, &updateBuf)
 	updateBuf.WriteString("\n")
 	updateBuf.WriteString(texts.Footer)
 	typewriter([]rune(updateBuf.String()), false)
@@ -73,8 +77,16 @@ func typewriter(converted []rune, specialCharSleep bool) {
 	}
 }
 
-func printLastUpdateInformation(t time.Time, weather api.Weather, buffer *bytes.Buffer) {
-	buffer.WriteString(fmt.Sprintf("%s | %02d:%02d - %02d.%02d.%04d (%s)\n", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year(), weather.Location))
+func printCityLastUpdateInformation(t time.Time, aare api.Aare, buffer *bytes.Buffer) {
+	if aare.Location != aare.LocationLong {
+		buffer.WriteString(fmt.Sprintf("%-14s: %s (%s)\n", texts.CityTitle, aare.Location, aare.LocationLong))
+	} else {
+		buffer.WriteString(fmt.Sprintf("%-14s: %s\n", texts.CityTitle, aare.Location))
+	}
+
+	buffer.WriteString(fmt.Sprintf("%-14s: %02d:%02d - %02d.%02d.%04d\n", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year()))
+
+	buffer.WriteString("\n")
 }
 
 func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
@@ -89,7 +101,7 @@ func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
 	buffer.WriteString("\n")
 	buffer.WriteString("---\n")
 	buffer.WriteString(
-		fmt.Sprintf("%-11s: %s %-3s <- %s",
+		fmt.Sprintf("%-14s: %s %-3s <- %s",
 			texts.WaterTemperatureLabel,
 			fmt.Sprintf("%-4.1f", aare.Temperature),
 			texts.DegreeCelsiusLabel,
@@ -98,7 +110,7 @@ func printAareTemperatureAndFlow(aare api.Aare, buffer *bytes.Buffer) {
 	buffer.WriteString("\n")
 
 	buffer.WriteString(
-		fmt.Sprintf("%-11s: %s %s <- %s (%s %s)",
+		fmt.Sprintf("%-14s: %s %s <- %s (%s %s)",
 			texts.WaterFlowLabel,
 			fmt.Sprintf("%3.0f", aare.Flow),
 			texts.CubicMetrePerSecondLabel,
@@ -121,7 +133,7 @@ func printNVA(weatherToday api.WeatherToday, buffer *bytes.Buffer) {
 }
 
 func nva(col2Text string, info api.WeatherInfos) string {
-	col2 := fmt.Sprintf("%-11s: %s° / %smm / %s%%", col2Text, fmt.Sprintf("%4.1f", info.Tt), fmt.Sprintf("%2d", info.Rr), fmt.Sprintf("%2d", info.Rrisk))
+	col2 := fmt.Sprintf("%-14s: %s° / %smm / %s%%", col2Text, fmt.Sprintf("%4.1f", info.Tt), fmt.Sprintf("%2.0f", info.Rr), fmt.Sprintf("%2d", info.Rrisk))
 	col3 := info.Syt
 	return fmt.Sprintf("%s <- %s", col2, col3)
 }

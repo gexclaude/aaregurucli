@@ -40,9 +40,21 @@ Obenuse, nid?
 
 ## Grundsätzlechs
 
-Usfüüährig uf dr Kommandozile wie fougt:
+Usfüüährig uf dr Kommandozile wie fougt (für Bärn):
 
     aareguru
+
+Oder
+
+    aareguru schribmaschine
+
+Weli Städt gits aui?
+
+    aareguru cities
+
+Tämperatur ds Thun?
+   
+    aareguru thun
 
 Spicke duesch grundsätzläch so:
 
