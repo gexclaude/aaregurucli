@@ -115,7 +115,7 @@ Denn duesch dr Chessu drzue und laschs la tschädere
     scoop bucket add aareguru https://github.com/gexclaude/scoop-bucket
     scoop install aareguru
 
-Zum spöter aktualisiere
+Zum später aktualisiere
 
     scoop update aareguru
 
