@@ -6,6 +6,7 @@ import (
 	"sync"
 )
 
+// RenderCities renders a table of cities
 func RenderCities(citiesResponseChannel chan api.CitiesResponse, errChannel chan string, wg *sync.WaitGroup) {
 
 	defer func() {
@@ -34,14 +35,12 @@ func readData(citiesResponseChannel chan api.CitiesResponse, errChannel chan str
 }
 
 func printOutput(citiesResponse api.CitiesResponse) {
-	
-    fmt.Printf("%-10s | %-10s | %s\n", "City *", "Name", "Gnaue Standort")
-    fmt.Printf("%-10s | %-10s | %s\n", "----------", "----------", "----------------------")
-    for _, elem := range citiesResponse.Cities {
-        fmt.Printf("%-10s | %-10s | %s\n", elem.City, elem.Name, elem.Longname)
-    }
-    fmt.Println()
-    fmt.Println("* gib das im command aus `city` argument a")
-    fmt.Println()
+	fmt.Printf("%-10s | %-10s | %s\n", "City *", "Name", "Gnaue Standort")
+	fmt.Printf("%-10s | %-10s | %s\n", "----------", "----------", "----------------------")
+	for _, elem := range citiesResponse.Cities {
+		fmt.Printf("%-10s | %-10s | %s\n", elem.City, elem.Name, elem.Longname)
+	}
+	fmt.Println()
+	fmt.Println("* gib das im command aus `city` argument a")
+	fmt.Println()
 }
-

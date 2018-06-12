@@ -128,10 +128,10 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 }
 
 func printCityAndLastUpdate(t time.Time, aare api.Aare) {
-    if aare.Location != aare.LocationLong {
-	    fmt.Println(box(fmt.Sprintf("%-13s | %s (%s)", texts.CityTitle, aare.Location, aare.LocationLong)))
+	if aare.Location != aare.LocationLong {
+		fmt.Println(box(fmt.Sprintf("%-13s | %s (%s)", texts.CityTitle, aare.Location, aare.LocationLong)))
 	} else {
-	    fmt.Println(box(fmt.Sprintf("%-13s | %s", texts.CityTitle, aare.Location)))
+		fmt.Println(box(fmt.Sprintf("%-13s | %s", texts.CityTitle, aare.Location)))
 	}
 	fmt.Println(box(fmt.Sprintf("%-13s | %02d:%02d - %02d.%02d.%04d", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year())))
 	fmt.Println(boxHorizontalLine())

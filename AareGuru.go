@@ -14,18 +14,18 @@ import (
 )
 
 var (
-	app            = kingpin.New("aareguru", texts.CliDescription)
-	standard       = app.Command("standard", texts.CliCommandStandardDescription).Default()
-	cityStandard   = standard.Arg("city", texts.CliCityDescription).String()
-	
+	app          = kingpin.New("aareguru", texts.CliDescription)
+	standard     = app.Command("standard", texts.CliCommandStandardDescription).Default()
+	cityStandard = standard.Arg("city", texts.CliCityDescription).String()
+
 	typewriter     = app.Command("schribmaschine", texts.CliCommandTypewriterDescription)
 	cityTypewriter = typewriter.Arg("city", texts.CliCityDescription).String()
-	
-	cities         = app.Command("cities", texts.CliCommandCitiesDescription)
-	proxy          = app.Flag("proxy", texts.CliProxyDescription).Short('p').String()
-	colorless      = app.Flag("ohni-farb", texts.CliColorlessDescription).Short('f').Bool()
-	noprogressbar  = app.Flag("ohni-ladebauke", texts.CliNoprogressbarDescription).Short('l').Bool()
-	debug          = app.Flag("debug", texts.CliProxyDescription).Short('d').Hidden().Bool()
+
+	cities        = app.Command("cities", texts.CliCommandCitiesDescription)
+	proxy         = app.Flag("proxy", texts.CliProxyDescription).Short('p').String()
+	colorless     = app.Flag("ohni-farb", texts.CliColorlessDescription).Short('f').Bool()
+	noprogressbar = app.Flag("ohni-ladebauke", texts.CliNoprogressbarDescription).Short('l').Bool()
+	debug         = app.Flag("debug", texts.CliProxyDescription).Short('d').Hidden().Bool()
 )
 
 func main() {
@@ -60,28 +60,28 @@ func main() {
 		outtypewrt.Init()
 		aareGuruResponseChannel := askAareGuru(errChannel, &wg, cityTypewriter)
 		outtypewrt.RenderAareGuruResponse(aareGuruResponseChannel, errChannel, &wg)
-    case cities.FullCommand():
-        citiesResponseChannel := askAareGuruForCities(errChannel, &wg)
-        outcities.RenderCities(citiesResponseChannel, errChannel, &wg)
+	case cities.FullCommand():
+		citiesResponseChannel := askAareGuruForCities(errChannel, &wg)
+		outcities.RenderCities(citiesResponseChannel, errChannel, &wg)
 	}
 }
 
-func askAareGuru (errChannel chan<- string, wg *sync.WaitGroup, city *string) chan api.AareGuruResponse {
+func askAareGuru(errChannel chan<- string, wg *sync.WaitGroup, city *string) chan api.AareGuruResponse {
 	aareGuruResponseChannel := make(chan api.AareGuruResponse)
 	go func() {
 		defer wg.Done()
 		wg.Add(1)
 		api.AskAareGuru(proxy, city, aareGuruResponseChannel, errChannel, *debug)
 	}()
-	return aareGuruResponseChannel 
+	return aareGuruResponseChannel
 }
 
-func askAareGuruForCities (errChannel chan<- string, wg *sync.WaitGroup) chan api.CitiesResponse {
+func askAareGuruForCities(errChannel chan<- string, wg *sync.WaitGroup) chan api.CitiesResponse {
 	citiesResponseChannel := make(chan api.CitiesResponse)
 	go func() {
 		defer wg.Done()
 		wg.Add(1)
 		api.AskAareGuruForCities(proxy, citiesResponseChannel, errChannel, *debug)
 	}()
-	return citiesResponseChannel 
+	return citiesResponseChannel
 }

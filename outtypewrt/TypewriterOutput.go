@@ -47,8 +47,8 @@ func printOutput(aareGuruResponse api.AareGuruResponse) {
 	buffer.WriteString(texts.LocationAndTimeTitle)
 	buffer.WriteString("\n")
 	buffer.WriteString("---\n")
-    printCityLastUpdateInformation(t, aare, &buffer)
-    
+	printCityLastUpdateInformation(t, aare, &buffer)
+
 	printAareTemperatureAndFlow(aare, &buffer)
 	buffer.WriteString("\n")
 	buffer.WriteString("\n")
@@ -78,14 +78,14 @@ func typewriter(converted []rune, specialCharSleep bool) {
 }
 
 func printCityLastUpdateInformation(t time.Time, aare api.Aare, buffer *bytes.Buffer) {
-    if aare.Location != aare.LocationLong {
-	    buffer.WriteString(fmt.Sprintf("%-14s: %s (%s)\n", texts.CityTitle, aare.Location, aare.LocationLong))
+	if aare.Location != aare.LocationLong {
+		buffer.WriteString(fmt.Sprintf("%-14s: %s (%s)\n", texts.CityTitle, aare.Location, aare.LocationLong))
 	} else {
-	    buffer.WriteString(fmt.Sprintf("%-14s: %s\n", texts.CityTitle, aare.Location))
+		buffer.WriteString(fmt.Sprintf("%-14s: %s\n", texts.CityTitle, aare.Location))
 	}
-	
+
 	buffer.WriteString(fmt.Sprintf("%-14s: %02d:%02d - %02d.%02d.%04d\n", texts.CurrentTitle, t.Hour(), t.Minute(), t.Day(), t.Month(), t.Year()))
-	
+
 	buffer.WriteString("\n")
 }
 

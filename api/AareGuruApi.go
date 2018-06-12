@@ -30,8 +30,8 @@ type Aare struct {
 
 // Weather holds weather related information from the AareGuruResponse
 type Weather struct {
-	Current  WeatherInfos
-	Today    WeatherToday
+	Current WeatherInfos
+	Today   WeatherToday
 }
 
 // WeatherToday represent today's weather split up into morning, afternoon and evening
@@ -63,7 +63,7 @@ func AskAareGuru(proxy *string, city *string, aareGuruResponseChannel chan<- Aar
 
 	client := createHTTPClient(proxy)
 
-    url := config.EndpointURL + "&city=" + *city
+	url := config.EndpointURL + "&city=" + *city
 
 	response, err := client.Get(url)
 	if err != nil {
@@ -88,16 +88,17 @@ func AskAareGuru(proxy *string, city *string, aareGuruResponseChannel chan<- Aar
 	aareGuruResponseChannel <- aareGuruResponse
 }
 
+// CitiesResponse contains all supported cities
 type CitiesResponse struct {
-    Cities []City
+	Cities []City
 }
 
+// City represents a single location supported by aareguru
 type City struct {
-    City     string
-    Name     string
-    Longname string
+	City     string
+	Name     string
+	Longname string
 }
-
 
 // AskAareGuruForCities ask aare.guru for cities, returns an CitiesResponse
 func AskAareGuruForCities(proxy *string, citiesResponseChannel chan<- CitiesResponse, errChannel chan<- string, debug bool) {
@@ -131,8 +132,8 @@ func AskAareGuruForCities(proxy *string, citiesResponseChannel chan<- CitiesResp
 		}
 	}
 
-    var citiesResponse CitiesResponse
-    citiesResponse.Cities = cities
+	var citiesResponse CitiesResponse
+	citiesResponse.Cities = cities
 	citiesResponseChannel <- citiesResponse
 }
 
