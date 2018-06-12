@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // AareGuruResponse root type of the aare.guru response
@@ -63,7 +64,7 @@ func AskAareGuru(proxy *string, city *string, aareGuruResponseChannel chan<- Aar
 
 	client := createHTTPClient(proxy)
 
-	url := config.EndpointURL + "&city=" + *city
+	url := config.EndpointURL + "&city=" + strings.ToLower(*city)
 
 	response, err := client.Get(url)
 	if err != nil {
@@ -98,6 +99,7 @@ type City struct {
 	City     string
 	Name     string
 	Longname string
+	Aare     float32
 }
 
 // AskAareGuruForCities ask aare.guru for cities, returns an CitiesResponse
