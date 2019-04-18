@@ -93,7 +93,7 @@ func CGreen(arg string) string {
 // CGray conditionally colored output in grey
 func CGray(arg string) string {
 	if isColored() {
-		return aurora.Gray(arg).String()
+		return aurora.Gray(20, arg).String()
 	}
 
 	return arg
