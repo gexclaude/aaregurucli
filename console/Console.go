@@ -23,6 +23,7 @@ func InitConsole(coloredParam bool) {
 		cmd.Run()
 	}
 	clear["darwin"] = clear["linux"]
+	clear["android"] = clear["linux"]
 	clear["windows"] = func() {
 		cmd := exec.Command("cmd", "/c", "cls") //Windows example, its tested
 		cmd.Stdout = os.Stdout
