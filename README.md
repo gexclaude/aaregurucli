@@ -20,6 +20,7 @@
    * [Autocompletion](#autocompletion)
       * [Bash](#bash)
       * [Zsh](#zsh)
+* [Ke Installation](#curl)
 * [Merci's (Credits)](#mercis-credits)
 
 ## Aare.Guru?
@@ -155,6 +156,12 @@ Fougende Befähl spöit s autcomplete script für Zsh use:
 
     aareguru --completion-script-zsh
 
+## Ke Installation
+
+Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de chasch o das mache hie mache
+
+    curl aare.li
+
 ## Merci's (Credits)
 
 * https://github.com/goreleaser/goreleaser
@@ -163,3 +170,10 @@ Fougende Befähl spöit s autcomplete script für Zsh use:
 * https://github.com/alecthomas/kingpin
 * https://github.com/lukesampson/scoop
 * https://github.com/Homebrew/brew/
+
+Contributors
+* "@Neo-Oli" (aare.li)
+* "@schlpbch" (Sprachpolizist)
+* "@MrStrix" (Sprachpolizist)
+* "@RolandStuder" (Sprachpolizist)
+* "@legap" (Proxy Config)
