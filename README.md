@@ -162,6 +162,8 @@ Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de
 
     curl aare.li
 
+<img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/curl-aare.li.png" alt="curl aare.li" />
+
 ## Merci's (Credits)
 
 Libs & tools:
