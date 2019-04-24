@@ -20,7 +20,7 @@
    * [Autocompletion](#autocompletion)
       * [Bash](#bash)
       * [Zsh](#zsh)
-* [Ke Installation](#curl)
+* [Ke Installation](#ke-installation)
 * [Merci's (Credits)](#mercis-credits)
 
 ## Aare.Guru?
