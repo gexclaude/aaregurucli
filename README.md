@@ -164,6 +164,7 @@ Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de
 
 ## Merci's (Credits)
 
+Libs & tools:
 * https://github.com/goreleaser/goreleaser
 * https://github.com/logrusorgru/aurora
 * https://github.com/gosuri/uiprogress
@@ -171,9 +172,9 @@ Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de
 * https://github.com/lukesampson/scoop
 * https://github.com/Homebrew/brew/
 
-Contributors
-* "@Neo-Oli" (aare.li)
-* "@schlpbch" (Sprachpolizist)
-* "@MrStrix" (Sprachpolizist)
-* "@RolandStuder" (Sprachpolizist)
-* "@legap" (Proxy Config)
+Contributors:
+* Neo-Oli (aare.li)
+* schlpbch (Sprachpolizist)
+* MrStrix (Sprachpolizist)
+* RolandStuder (Sprachpolizist)
+* legap (Proxy Config)
