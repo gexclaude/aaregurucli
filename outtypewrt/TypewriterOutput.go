@@ -1,11 +1,11 @@
 package outtypewrt
 
 import (
-	"../api"
-	"../outcmn"
-	"../texts"
 	"bytes"
 	"fmt"
+	"github.com/gexclaude/aaregurucli/api"
+	"github.com/gexclaude/aaregurucli/outcmn"
+	"github.com/gexclaude/aaregurucli/texts"
 	"strconv"
 	"sync"
 	"time"

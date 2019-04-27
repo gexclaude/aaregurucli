@@ -1,9 +1,9 @@
 package api
 
 import (
-	"../config"
 	"encoding/json"
 	"fmt"
+	"github.com/gexclaude/aaregurucli/config"
 	"io/ioutil"
 	"net/http"
 	"net/url"

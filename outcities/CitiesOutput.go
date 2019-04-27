@@ -1,11 +1,11 @@
 package outcities
 
 import (
-	"../api"
-	"../asciiart"
-	"../console"
-	"../texts"
 	"fmt"
+	"github.com/gexclaude/aaregurucli/api"
+	"github.com/gexclaude/aaregurucli/asciiart"
+	"github.com/gexclaude/aaregurucli/console"
+	"github.com/gexclaude/aaregurucli/texts"
 	"strconv"
 	"sync"
 )
