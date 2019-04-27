@@ -1,13 +1,13 @@
 package main
 
 import (
-	"./api"
-	"./console"
-	"./outcities"
-	"./outstd"
-	"./outtypewrt"
-	"./texts"
 	"fmt"
+	"github.com/gexclaude/aaregurucli/api"
+	"github.com/gexclaude/aaregurucli/console"
+	"github.com/gexclaude/aaregurucli/outcities"
+	"github.com/gexclaude/aaregurucli/outstd"
+	"github.com/gexclaude/aaregurucli/outtypewrt"
+	"github.com/gexclaude/aaregurucli/texts"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 	"sync"

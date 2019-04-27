@@ -1,12 +1,12 @@
 package outstd
 
 import (
-	"../api"
-	"../asciiart"
-	"../console"
-	"../outcmn"
-	"../texts"
 	"fmt"
+	"github.com/gexclaude/aaregurucli/api"
+	"github.com/gexclaude/aaregurucli/asciiart"
+	"github.com/gexclaude/aaregurucli/console"
+	"github.com/gexclaude/aaregurucli/outcmn"
+	"github.com/gexclaude/aaregurucli/texts"
 	"github.com/gosuri/uiprogress"
 	"strconv"
 	"sync"
