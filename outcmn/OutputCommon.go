@@ -1,7 +1,7 @@
 package outcmn
 
 import (
-	"github.com/toasterson/aaregurucli/texts"
+	"github.com/gexclaude/aaregurucli/texts"
 	"math/rand"
 	"time"
 )
