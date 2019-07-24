@@ -6,6 +6,8 @@ github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gosuri/uilive v0.0.2 h1:Q7HzS0bZt6eGom1okr1wDMYIf37MKYEzKDmZDYDJPdo=
 github.com/gosuri/uilive v0.0.2/go.mod h1:qkLSc0A5EXSP6B04TrN4oQoxqFI7A8XvoXSlJi8cwk8=
+github.com/gosuri/uilive v0.0.3 h1:kvo6aB3pez9Wbudij8srWo4iY6SFTTxTKOkb+uRCE8I=
+github.com/gosuri/uilive v0.0.3/go.mod h1:qkLSc0A5EXSP6B04TrN4oQoxqFI7A8XvoXSlJi8cwk8=
 github.com/gosuri/uiprogress v0.0.0-20170224063937-d0567a9d84a1 h1:4iPLwzjiWGBQnYdtKbg/JNlGlEEvklrrMdjypdA1LKQ=
 github.com/gosuri/uiprogress v0.0.0-20170224063937-d0567a9d84a1/go.mod h1:C1RTYn4Sc7iEyf6j8ft5dyoZ4212h8G1ol9QQluh5+0=
 github.com/logrusorgru/aurora v0.0.0-20190417130405-e50442bb4cb5 h1:1jmSMm6Ob8hsOPlmQuK0NzTzW20mhdSPRuuQWLujSf0=
