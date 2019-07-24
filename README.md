@@ -175,8 +175,10 @@ Libs & tools:
 * https://github.com/Homebrew/brew/
 
 Contributors:
+* aare.guru kärnteam
 * Neo-Oli (aare.li)
 * schlpbch (Sprachpolizist)
 * MrStrix (Sprachpolizist)
 * RolandStuder (Sprachpolizist)
 * legap (Proxy Config)
+* roger-wetzel (Graad Celsius Korrektuur)
