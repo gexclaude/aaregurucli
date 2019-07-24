@@ -13,7 +13,7 @@ const CurrentTitle = "Latest Öpdate"
 const Forecast2hTitle = "I öpe 2h"
 
 // DegreeCelsiusLabel used as a label for console output
-const DegreeCelsiusLabel = "C°"
+const DegreeCelsiusLabel = "°"
 
 // CubicMetrePerSecondLabel used as a label for console output
 const CubicMetrePerSecondLabel = "m3/s"
