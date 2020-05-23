@@ -21,7 +21,7 @@
       * [Bash](#bash)
       * [Zsh](#zsh)
 * [Ke Installation](#ke-installation)
-* [macOS Menubar](#macos-menurbar)
+* [macOS Menubar](#macos-menubar)
 * [Merci's (Credits)](#mercis-credits)
 
 ## Aare.Guru?
