@@ -21,6 +21,7 @@
       * [Bash](#bash)
       * [Zsh](#zsh)
 * [Ke Installation](#ke-installation)
+* [macOS Menubar](#macos-menurbar)
 * [Merci's (Credits)](#mercis-credits)
 
 ## Aare.Guru?
@@ -163,6 +164,12 @@ Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de
     curl aare.li
 
 <img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/curl-aare.li.png" alt="curl aare.li" />
+
+## macOS Menubar
+
+Wede säute es Terminal offe hesch, aber uf mac bisch
+
+* https://github.com/Aareguru/aare.guru.bitbar
 
 ## Merci's (Credits)
 
