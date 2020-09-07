@@ -40,6 +40,14 @@ Obenuse, nid?
 
 <img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/aareguru-schribmaschine.gif" alt="aare.guru - schribmaschine" />
 
+Heschs gärn im vintage-look?
+
+<a href="https://vimeo.com/455224864" target="_blank">
+<img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/retro-cli.png" alt="aare.guru - schribmaschine retro" />
+</a>
+
+Merci https://github.com/Swordfish90/cool-retro-term
+
 ## Grundsätzlechs
 
 Usfüüährig uf dr Kommandozile wie fougt (für Bärn):
