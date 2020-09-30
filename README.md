@@ -46,6 +46,12 @@ Heschs gärn im vintage-look?
 <img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/retro-cli.png" alt="aare.guru - schribmaschine retro" />
 </a>
 
+Oder mit no me retro feeling?
+
+<a href="https://vimeo.com/463607694" target="_blank">
+<img src="https://github.com/gexclaude/aaregurucli/blob/master/docs/gifs/retro-mockup-cli.png" alt="aare.guru - schribmaschine retro" />
+</a>
+
 Merci https://github.com/Swordfish90/cool-retro-term
 
 ## Grundsätzlechs
