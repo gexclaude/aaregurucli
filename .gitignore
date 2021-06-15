@@ -88,3 +88,9 @@ modules.xml
 # End of https://www.gitignore.io/api/intellij
 
 dist/**
+
+# AUR
+pkg/
+src/
+aaregurucli
+aaregurucli-git*
