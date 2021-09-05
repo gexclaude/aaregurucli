@@ -12,6 +12,7 @@
    * [Linux](#linux)
       * [RPM: D RPM Datei häre chnüble](#rpm-d-rpm-datei-h%C3%A4re-chn%C3%BCble)
       * [Debian: D Deb Datei mit blose Chlööpe häre tue](#debian-d-deb-datei-mit-blose-chl%C3%B6%C3%B6pe-h%C3%A4re-tue)
+      * [AUR: Für alli mitem Arch-Superioritykomplex ](#aur-F%C3%BCr-alli-mitem-Arch-Superioritykomplex)
    * [Windows](#windows)
       * [Windows: Mit scoop aareguru ufläse](#windows-mit-scoop-aareguru-ufl%C3%A4se)
       * [Windows: ds Päckli vo Häntsche abelade](#windows-ds-p%C3%A4ckli-vo-h%C3%A4ntsche-abelade)
@@ -103,6 +104,14 @@ Suechdr die richtig Plattform us kopier dr Link zur Deb-Datei vodr Release Site 
 
     wget https://github.com/gexclaude/aaregurucli/releases/download/v<...>/aareguru_<...>.deb -0 aareguru.deb
     sudo dpkg -i aareguru.deb
+
+### AUR: Für alli mitem Arch-Superioritykomplex 
+
+Suechdr die richtig Plattform us u installiers mit dim liäblings AUR Häufer: [AUR](https://aur.archlinux.org/packages/aaregurucli-git/)  
+z.B.  
+```
+yay aaregurucli
+```
 
 ### Windows
 
