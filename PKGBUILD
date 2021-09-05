@@ -1,6 +1,6 @@
 # Maintainer:  jon4hz me@jon4hz.io
 pkgname=aaregurucli-git
-pkgver=0.4.3
+pkgver=0.5.0
 pkgrel=1
 epoch=
 pkgdesc="aare.guru CLI "

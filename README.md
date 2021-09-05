@@ -212,3 +212,4 @@ Contributors:
 * RolandStuder (Sprachpolizist)
 * legap (Proxy Config)
 * roger-wetzel (Graad Celsius Korrektuur)
+* jon4hz (Go Update + AUR Päckli)
