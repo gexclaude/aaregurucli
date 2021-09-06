@@ -36,6 +36,7 @@ brews:
     tap:
       owner: gexclaude
       name: homebrew-tap
+      token: "{{ .Env.GITHUB_TOKEN }}"
     folder: Formula
     homepage:  https://aare.guru/
     description: aare.guru Aaretemperatur & Wetter & Sonne fürs Aareschwimmen - Chills mau wider chli
