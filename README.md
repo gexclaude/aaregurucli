@@ -182,7 +182,7 @@ Fougende Befähl spöit s autcomplete script für Zsh use:
 
 ## Ke Installation
 
-Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de chasch o das mache hie mache
+Wede ke Lust ufne Installation hesch, aber das ganze gliich no heiss fingsch, de chasch o das hie mache
 
     curl aare.li
 
